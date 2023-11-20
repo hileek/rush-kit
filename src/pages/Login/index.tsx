@@ -49,7 +49,7 @@ const Login = () => {
         initialValues={{ remember: true }}
         onFinish={onFinish}
       >
-        <h2 className="login-title">Login</h2>
+        <h2 className="login-title">rush kit</h2>
         <Form.Item
           name="username"
           rules={[{ required: true, message: 'Please input your username!' }]}

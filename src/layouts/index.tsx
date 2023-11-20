@@ -19,14 +19,14 @@ import { ScreenType } from '@/types/app';
 const Layouts = () => {
   const { Header, Content, Footer, Sider } = Layout;
   const { t } = useTranslation();
-  const widthTypeMap = {
+  const collapsedWidthMap = {
     small: 0,
     middle: 80,
     large: 80,
     '': 80,
   };
-  const [screenWidth, setScreenWidth] = useState<ScreenType>(getScreenType());
-  const [collapsed, setCollapsed] = useState<boolean>(screenWidth !== 'large');
+  const [screenType, setScreenType] = useState<ScreenType>(getScreenType());
+  const [collapsed, setCollapsed] = useState<boolean>(screenType !== 'large');
 
   const {
     token: { colorBgContainer },
@@ -67,17 +67,17 @@ const Layouts = () => {
   const items = generateItems(routes);
 
   useEffect(() => {
-    if (screenWidth === 'large') {
+    if (screenType === 'large') {
       setCollapsed(false);
     } else {
       setCollapsed(true);
     }
-  }, [screenWidth]);
+  }, [screenType]);
 
   useEffect(() => {
     const handleResize = () => {
       requestAnimationFrame(() => {
-        setScreenWidth(getScreenType());
+        setScreenType(getScreenType());
       });
     };
 
@@ -92,7 +92,7 @@ const Layouts = () => {
     <Layout className="h-100">
       <Sider
         breakpoint="md"
-        collapsedWidth={widthTypeMap[screenWidth]}
+        collapsedWidth={collapsedWidthMap[screenType]}
         onCollapse={(collapsed, type) => {
           console.log(collapsed, type);
           collapsed && setCollapsed(collapsed)
@@ -118,7 +118,6 @@ const Layouts = () => {
               }}
             />
           {/* </Dropdown> */}
-          {screenWidth}
           <Breadcrumb />
         </Header>
         <Content style={{ margin: '24px 16px 0' }}>

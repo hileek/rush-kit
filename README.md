@@ -1,3 +1,16 @@
+## 项目名称 rush-kit
+
+## 项目概述
+基于react18+antDesign+typescript+redux技术栈，企业级快速搭建后台管理系统的项目
+
+## 快速开始
+```bash
+git clone https://github.com/peekdog/react-antd-typescript.git
+cd react-antd-typescript
+npm install
+npm run mock
+npm start
+
 ## 可用脚本
 
 在项目目录中，可以运行：
@@ -10,7 +23,11 @@
 如果您进行编辑，页面将重新加载。
 您还将在控制台中看到任何 lint 错误。
 
-### 'npm 测试'
+### 'npm run mock'
+
+启动mock服务
+
+### 'npm test'
 
 在交互式监视模式下启动测试运行程序。
 有关更多信息，请参阅有关 [运行测试]（https://facebook.github.io/create-react-app/docs/running-tests）的部分。
@@ -29,42 +46,36 @@
 
 {
   message: string 请求状态描述,
-  data: {} 或者 [],
-  code: int 错误码，非 0 表示失败:
+  data: any,
+  code: 200成功
 }
 
 ## 目录结构
 
-├── config                   # umi 配置，包含路由，构建等配置
-├── mock                     # 本地模拟数据
-├── public
-│   └── favicon.png          # Favicon
-├── src
-│   ├── assets               # 本地静态资源
-│   ├── components           # 业务通用组件
-│   ├── e2e                  # 集成测试用例
-│   ├── layouts              # 通用布局
-│   ├── models               # 全局 dva model
-│   ├── pages                # 业务页面入口和常用模板
-│         ├── Welcome        // 路由组件下不应该再包含其他路由组件，基于这个约定就能清楚的区分路由组件和非路由组件了
-│         |   ├── components // 对于复杂的页面可以再自己做更深层次的组织，但建议不要超过三层
-│         |   ├── Form.tsx
-│         |   ├── index.tsx  // 页面组件的代码
-│         |   └── index.less // 页面样式
-│         ├── Order          // 路由组件下不应该再包含其他路由组件，基于这个约定就能清楚的区分路由组件和非路由组件了
-│         |   ├── index.tsx
-│         |   └── index.less
-│         ├── User
-│         |   ├── components // group 下公用的组件集合
-│         |   ├── Login      // group 下的页面 Login
-│         |   ├── Register   // group 下的页面 Register
-│         |   └── util.ts    // 这里可以有一些共用方法之类，不做推荐和约束，看业务场景自行做组织
-│         └── *              // 其它页面组件代码
-│   ├── services             # 后台接口服务
-│   ├── utils                # 工具库
-│   ├── locales              # 国际化资源
-│   ├── global.less          # 全局样式
-│   └── global.ts            # 全局 JS
-├── tests                    # 测试工具
-├── README.md
-└── package.json
+```plaintext
+.
+|-- config/              # umi 配置，包含路由，构建等配置
+|-- mock/                # 本地模拟数据
+|-- public/              # 本地模拟数据
+|   |-- favicon.ico/     # Favicon
+|-- src/                 # 源代码目录
+|   |-- assets/          # 本地静态资源
+|   |-- components/      # 组件目录
+|       |-- Button/
+|       |-- Header/
+|   |-- hooks/           # 自定义hooks
+|   |-- layouts/         # 通用布局
+|   |-- locales/         # 国际化资源
+|   |-- pages/           # 业务页面入口和常用模板
+|   |-- redux/           # 消息管理中心
+|   |-- routes/          # 路由
+|   |-- services/        # 后台接口服务
+|   |-- styles/          # 全局公共样式
+|   |-- types/           # typescript类型
+|   |-- utils/           # 工具库
+|   |-- App.tsx          # 主应用组件
+|   |-- index.tx         # 入口文件
+|-- .env.development     # 开发环境环境
+|-- .env.production      # 生产环境环境
+|-- tsconfig.json        # typescript配置文件
+|-- README.md            # 项目说明文件
