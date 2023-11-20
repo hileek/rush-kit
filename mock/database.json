@@ -1,0 +1,99 @@
+{
+  "getRoutes": {
+    "code": 200,
+    "message": "操作成功",
+    "data": [
+      {
+        "id": 1,
+        "key": 1,
+        "title": "系统管理",
+        "label": "系统管理",
+        "name": "System",
+        "icon": "SettingOutlined",
+        "path": "/system",
+        "redirect": "/system/user",
+        "component": null,
+        "isMenu": true,
+        "isExternalLink": false,
+        "children": [
+          {
+            "id": 2,
+            "key": 2,
+            "title": "用户管理",
+            "label": "用户管理",
+            "name": "User",
+            "icon": "SettingOutlined",
+            "path": "/system/user",
+            "component": "pages/System/User",
+            "isMenu": true,
+            "permissions": ["view_dashboard"],
+            "isExternalLink": false,
+            "children":[]
+          },
+          {
+            "id": 3,
+            "key": 3,
+            "title": "角色管理",
+            "label": "角色管理",
+            "name": "Role",
+            "icon": "SettingOutlined",
+            "path": "/system/role",
+            "component": "pages/System/Role",
+            "isMenu": false,
+            "permissions": ["view_dashboard"],
+            "isExternalLink": false,
+            "children":[]
+          },
+          {
+            "id": 5,
+            "key": 5,
+            "title": "菜单管理",
+            "label": "菜单管理",
+            "name": "Menu",
+            "icon": "SettingOutlined",
+            "path": "/system/menu",
+            "component": "pages/System/Menu",
+            "isMenu": true,
+            "permissions": ["view_dashboard"],
+            "isExternalLink": false,
+            "children":[]
+          },
+          {
+            "id": 6,
+            "key": 6,
+            "title": "antd",
+            "label": "antd",
+            "name": "Menu",
+            "icon": "LinkOutlined",
+            "path": "https://ant.design/components/menu-cn#itemtype",
+            "component": null,
+            "isMenu": true,
+            "permissions": ["view_dashboard"],
+            "isExternalLink": true,
+            "children":[]
+          }
+        ]
+      }
+    ]
+  },
+  "getPermissions": {
+    "code": 200,
+    "message":"操作成功",
+    "permissions": "system/user:read:update:delete:add:move,system/menu:read:update:delete:add:move,"
+  },
+  "userList": [
+    {
+      "id": 1
+    }
+  ],
+  "comments": [
+    {
+      "id": 1,
+      "body": "some comment",
+      "postId": 1
+    }
+  ],
+  "profile": {
+    "name": "typicode"
+  }
+}

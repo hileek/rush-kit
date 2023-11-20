@@ -1,0 +1,69 @@
+.w-100 {
+  width: 100vh;
+}
+.h-100 {
+  height: 100vh;
+}
+// #region flex
+.flex {
+  display: flex;
+}
+
+.ai-center {
+  align-items: center;
+}
+
+.js-center {
+  justify-content: center;
+}
+// #endregion
+
+// #region font
+
+.font-bold {
+  font-weight: bold;
+}
+
+.text-center {
+  text-align: center;
+}
+// #endregion
+
+// #region 生成类
+// @property：属性, @abbreviation：类的缩写, @min：最小值, @max：最大值
+.generate-variants(@property, @abbreviation, @min, @max) {
+  .variants-loop(@property, @abbreviation, @min, @min, @max);
+}
+
+.variants-loop(@property, @abbreviation, @value, @min, @max) when (@value <= @max) {
+  .@{abbreviation}-@{value} {
+    // @{property}: @value px;这种写法有问题，值和单位之间有空格会导致css不生效。
+    @{property}: (@value * 1px);
+  }
+  .variants-loop(@property, @abbreviation, (@value + 2), @min, @max); // 步长改为2
+}
+
+// 表示padding-top的值为2px-100px的偶数值的类，用法className="pt-30"，表示padding-top的值为30px
+.generate-variants(padding-top, pt, 2, 100);
+.generate-variants(margin-left, ml, 2, 100);
+// 用法font-14，表示font-size为14px
+.generate-variants(font-size, font, 14, 50);
+// #endregion
+
+// #region 颜色
+@white-color: #fff;
+@black-color: #000;
+
+.color-variants(@color) {
+  .color-@{color} {
+    color: ~"@{color}";
+  }
+  .bg-@{color} {
+    background-color: ~"@{color}";
+  }
+}
+
+.color-variants(white);
+.color-variants(black);
+
+// #endregion
