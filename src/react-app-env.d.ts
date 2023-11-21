@@ -1,6 +1,6 @@
-import 'node';
-import 'react';
-import 'react-dom';
+// import 'node';
+// import 'react';
+// import 'react-dom';
 
 declare namespace NodeJS {
   interface ProcessEnv {

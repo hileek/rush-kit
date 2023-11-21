@@ -1,14 +1,14 @@
 import React, { Suspense, lazy } from 'react';
 import { useSelector } from 'react-redux';
 import { Routes as RouterList, Route, Navigate } from 'react-router-dom';
-import PrivateRoute from './PrivateRoute';
+import AuthRoute from './AuthRoute';
 // import routes from './config';
 import Layouts from '../layouts';
 import NotFound from '../pages/NotFound';
 import Login from '../pages/Login';
 import { RouteType } from '@/types/route';
 import { Spin } from 'antd';
-import { isAuth } from '@/utils/storage';
+import { LOGIN_PATH } from './constans';
 
 const generateRoutes = (routes: RouteType[]): any => {
   return routes.map((route: RouteType) => {
@@ -25,7 +25,8 @@ const generateRoutes = (routes: RouteType[]): any => {
                     <div className="content" />
                   </Spin>
                 }>
-                  <Component />
+                  <AuthRoute path={route.path}><Component /></AuthRoute>
+                  {/* <Component /> */}
                 </Suspense>
               }
             >
@@ -46,13 +47,13 @@ const Routes = () => {
   }));
   return (
     <RouterList>
-      <Route path="/" element={<PrivateRoute><Layouts /></PrivateRoute>}>
+      <Route path="/" element={<AuthRoute path="/"><Layouts /></AuthRoute>}>
         <Route path="/" element={<Navigate to='/home' replace />} />
         {generateRoutes(routes)}
         {/* <RouteType path="/404" element={<NotFound />} /> */}
         <Route path="*" element={<NotFound />} />
       </Route>
-      <Route path="/login" element={isAuth() ? <Navigate to="/" replace /> : <Login />} />
+      <Route path={LOGIN_PATH} element={<AuthRoute path={LOGIN_PATH}><Login /></AuthRoute>} />
       {/* <RouteType path="*" element={<Navigate to="/404" />} /> */}
     </RouterList>
   );

@@ -1,45 +1,55 @@
 // Login.js
 
 import React from 'react';
+import { useNavigate } from 'react-router';
 import { Form, Input, Button, Checkbox } from 'antd';
+import { useDispatch } from 'react-redux';
+import { fetchRoutes } from '@/redux/actions/fetchRoutes'; 
 import { UserOutlined, LockOutlined } from '@ant-design/icons';
 import styled from 'styled-components';
+import storage from '@/utils/storage';
+
+const Wrapper = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+
+  .login-form {
+    width: 300px;
+    padding: 20px;
+    border: 1px solid #e8e8e8;
+    border-radius: 5px;
+    background-color: #fff;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  }
+
+  .login-title {
+    text-align: center;
+    font-size: 24px;
+    margin-bottom: 20px;
+  }
+
+  .login-form-forgot {
+    float: right;
+  }
+
+  .login-form-button {
+    width: 100%;
+  }
+`;
 
 const Login = () => {
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
+
   const onFinish = (values: any) => {
     console.log('Received values:', values);
     // 在这里处理登录逻辑
+    storage.setToken('123123');
+    dispatch(fetchRoutes() as any)
+    navigate('/new-route', { replace: true });
   };
-
-  const Wrapper = styled.div`
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    height: 100vh;
-
-    .login-form {
-      width: 300px;
-      padding: 20px;
-      border: 1px solid #e8e8e8;
-      border-radius: 5px;
-      background-color: #fff;
-      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    }
-    
-    .login-title {
-      text-align: center;
-      font-size: 24px;
-      margin-bottom: 20px;
-    }
-    
-    .login-form-forgot {
-      float: right;
-    }
-    
-    .login-form-button {
-      width: 100%;
-    }
-  `;
 
   return (
     <Wrapper className="login-container">

@@ -1,9 +1,11 @@
 import axios from 'axios';
 import React, { useEffect } from 'react';
+import { useNavigate } from 'react-router';
 import { useTranslation } from 'react-i18next';
 import listToTree from '@/utils/listToTree';
 
 const Home = () => {
+  const navigate  = useNavigate();
   const { i18n, t } = useTranslation();
 
   const changeLanguage = (lng: string) => {
@@ -20,7 +22,7 @@ const Home = () => {
   return (
     <div className='font-40'>
       <div>
-      <p>{t('a')}</p>
+      <p onClick={() => navigate('/login')}>{t('a')}</p>
       <p>{t('greeting', { name: 'John' })}</p>
       <button>{t('button')}</button>
     </div>
