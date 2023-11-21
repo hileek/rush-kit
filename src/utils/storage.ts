@@ -1,3 +1,4 @@
+import Cookies from 'js-cookie';
 import { TOKEN_NAME } from './constants';
 
 const setItem = (key: string, value: any) => {
@@ -15,9 +16,19 @@ const removeItem = (key: string) => {
 
 // export const isAuth = () => !!getItem(TOKEN_NAME);
 
-const getToken = () => getItem(TOKEN_NAME);
-const setToken = (value: any) => setItem(TOKEN_NAME, value);
-const removeToken = () => removeItem(TOKEN_NAME);
+const getToken = () => Cookies.get(TOKEN_NAME);
+const setToken = (value: string, expires?: number) => {
+  const nowTime: number = new Date().getTime();
+  if (expires) {
+    const expiresTime: Date = new Date(nowTime + expires * 1000);
+    Cookies.set(TOKEN_NAME, value, { expires: expiresTime });
+    return;
+  }
+  Cookies.set(TOKEN_NAME, value);
+};
+const removeToken = () => {
+  Cookies.remove(TOKEN_NAME);
+};
 
 const clear = () => {
   localStorage.clear();

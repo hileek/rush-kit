@@ -242,7 +242,7 @@ const Video = ({ autoPlay, src, control, muted, poster }) => {
       setTimeout(() => {
         clearTimeout(timer.current);
       });
-    };
+    }
   }, [isPlay, control]);
 
   const fullScreen = () => {
@@ -443,7 +443,6 @@ Video.propTypes = {
   control: PropTypes.bool.isRequired,
   poster: PropTypes.string,
   autoPlay: PropTypes.bool,
-  control: PropTypes.bool,
   muted: PropTypes.bool,
 };
 

@@ -1,4 +1,4 @@
-import { RouteType } from "@/types/route";
+import { RouteType } from '@/types/route';
 const staticRoutes: Array<RouteType> = [
   {
     id: 'home',

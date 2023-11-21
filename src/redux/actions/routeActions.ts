@@ -1,4 +1,4 @@
-import { SET_ROUTES } from "../constants/type";
+import { SET_ROUTES } from '../constants/type';
 import { RouteType } from '@/types/route';
 
 export const setRoutes = (routes: RouteType[]) => {

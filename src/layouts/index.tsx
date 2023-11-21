@@ -43,7 +43,8 @@ const Layouts = () => {
     const items: MenuItem[] = [];
 
     for (const item of routes) {
-      let { icon, children, label, isExternalLink, isMenu, path, type } = item;
+      const { icon, children, isExternalLink, isMenu, path, type } = item;
+      let label = item.label;
       if (!isMenu) continue;
 
       const IconComponent = (Icon as unknown as { [key: string]: React.ComponentType<AntdIconProps> })[icon] || null;

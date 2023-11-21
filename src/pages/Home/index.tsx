@@ -1,6 +1,7 @@
-import axios from "axios";
-import { useEffect } from "react";
+import axios from 'axios';
+import React, { useEffect } from 'react';
 import { useTranslation } from 'react-i18next';
+import listToTree from '@/utils/listToTree';
 
 const Home = () => {
   const { i18n, t } = useTranslation();
@@ -17,7 +18,7 @@ const Home = () => {
     getData();
   }, []);
   return (
-    <div className="font-40">
+    <div className='font-40'>
       <div>
       <p>{t('a')}</p>
       <p>{t('greeting', { name: 'John' })}</p>

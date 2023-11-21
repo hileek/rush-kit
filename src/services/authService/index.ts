@@ -1,6 +1,6 @@
-import api from "../api";
-import { ApiResponse } from "@/types/response";
-import { RouteType } from "@/types/route";
+import api from '../api';
+import { ApiResponse } from '@/types/response';
+import { RouteType } from '@/types/route';
 
 const getRoutes = async () => {
   const { code, data, message }: ApiResponse<RouteType[]> = await api.get('/getRoutes');

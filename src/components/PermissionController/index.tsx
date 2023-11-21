@@ -1,4 +1,4 @@
-import { ReactNode } from "react";
+import { ReactNode } from 'react';
 
 const PermissionController = ({ requiredPermission, children } : { requiredPermission: string, children: ReactNode }) => {
   const userPermissions: any[] = [];
