@@ -4,11 +4,18 @@ import { Menu as AntMenu, MenuProps, } from 'antd';
 
 type MenuItem = Required<MenuProps>['items'][number];
 
-const Menu = ({ externalLinkMap, items }: { externalLinkMap: any, items:MenuItem[] }) => {
+interface Props {
+  externalLinkMap: Record<string, string>;
+  items: MenuItem[];
+}
+
+
+const Menu: React.FC<Props> = ({ externalLinkMap, items }) => {
+  console.log(externalLinkMap, items)
   const navigate = useNavigate();
   const location = useLocation();
   const current = location.pathname;
-
+  console.log('菜单')
   const onClick: MenuProps['onClick'] = (e) => {
     if (externalLinkMap[e.key] || e.key === current) return;
     navigate(e.key);

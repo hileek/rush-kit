@@ -15,7 +15,6 @@ import getScreenType from '@/utils/getScreenType';
 import { RouteType } from '@/types/route';
 import { ScreenType } from '@/types/app';
 
-
 const Layouts = () => {
   const { Header, Content, Footer, Sider } = Layout;
   const { t } = useTranslation();

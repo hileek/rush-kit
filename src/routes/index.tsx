@@ -8,7 +8,7 @@ import NotFound from '../pages/NotFound';
 import Login from '../pages/Login';
 import { RouteType } from '@/types/route';
 import { Spin } from 'antd';
-import { LOGIN_PATH } from './constans';
+import { HOME_PATH, LOGIN_PATH } from './constans';
 
 const generateRoutes = (routes: RouteType[]): any => {
   return routes.map((route: RouteType) => {
@@ -48,7 +48,7 @@ const Routes = () => {
   return (
     <RouterList>
       <Route path="/" element={<AuthRoute path="/"><Layouts /></AuthRoute>}>
-        <Route path="/" element={<Navigate to='/home' replace />} />
+        <Route path="/" element={<Navigate to={HOME_PATH} replace />} />
         {generateRoutes(routes)}
         {/* <RouteType path="/404" element={<NotFound />} /> */}
         <Route path="*" element={<NotFound />} />
