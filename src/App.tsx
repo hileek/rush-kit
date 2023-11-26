@@ -9,7 +9,6 @@ const App = () => {
   const dispatch = useDispatch();
 
   useEffect(() => {
-    console.log('app挂载')
     const isAuthenticated = isAuth();
     if (isAuthenticated) {
       dispatch(fetchRoutes() as any);

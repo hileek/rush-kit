@@ -1,23 +1,18 @@
 import React, { useEffect, useState } from 'react';
 import { Outlet } from 'react-router';
-import { Layout, theme, Button, Dropdown, MenuProps, Spin } from 'antd';
+import { Layout, theme, Button } from 'antd';
 import {
   MenuFoldOutlined,
   MenuUnfoldOutlined,
 } from '@ant-design/icons';
 import Menu from './Menu';
-import Breadcrumb from './Breadcrumb';
-import { useSelector } from 'react-redux';
-import { useTranslation } from 'react-i18next';
-import { AntdIconProps } from '@ant-design/icons/lib/components/AntdIcon';
-import * as Icon from '@ant-design/icons';
+import Breadcrumb from './Header/Breadcrumb';
+import Tabs from './Header/Tabs';
 import getScreenType from '@/utils/getScreenType';
-import { RouteType } from '@/types/route';
 import { ScreenType } from '@/types/app';
 
 const Layouts = () => {
   const { Header, Content, Footer, Sider } = Layout;
-  const { t } = useTranslation();
   const collapsedWidthMap = {
     small: 0,
     middle: 80,
@@ -30,41 +25,6 @@ const Layouts = () => {
   const {
     token: { colorBgContainer },
   } = theme.useToken();
-  const { routes } = useSelector((state: any) => ({
-    routes: state.route.routes,
-    loading: state.route.loading,
-  }));
-
-  // key为menu的key，value表示是否外链
-  const externalLinkMap: any = {};
-  type MenuItem = Required<MenuProps>['items'][number];
-  const generateItems = (routes: RouteType[]): MenuItem[] => {
-    const items: MenuItem[] = [];
-
-    for (const item of routes) {
-      const { icon, children, isExternalLink, isMenu, path, type } = item;
-      let label = item.label;
-      if (!isMenu) continue;
-
-      const IconComponent = (Icon as unknown as { [key: string]: React.ComponentType<AntdIconProps> })[icon] || null;
-
-      if (isExternalLink) {
-        externalLinkMap[path] = true;
-        label = <a href={path} target="_blank" rel="noopener noreferrer">{t(label)}</a> as unknown as string;
-      }
-
-      items.push({
-        key: path,
-        icon: IconComponent && <IconComponent />,
-        children: children?.length ? generateItems(children) : undefined,
-        label: typeof label === 'string' ? t(label) : label,
-        type,
-      });
-    }
-    return items;
-  }
-
-  const items = generateItems(routes);
 
   useEffect(() => {
     if (screenType === 'large') {
@@ -94,7 +54,6 @@ const Layouts = () => {
         breakpoint="md"
         collapsedWidth={collapsedWidthMap[screenType]}
         onCollapse={(collapsed, type) => {
-          console.log(collapsed, type);
           collapsed && setCollapsed(collapsed)
         }}
         collapsible
@@ -102,24 +61,23 @@ const Layouts = () => {
         trigger={null}
       >
         <div className="demo-logo-vertical" />
-        <Menu items={items} externalLinkMap={externalLinkMap} />
+        <Menu />
       </Sider>
       <Layout>
         <Header style={{ padding: 0, background: colorBgContainer }} className="flex ai-center">
-          {/* <Dropdown menu={{ items }}> */}
-            <Button
-              type="text"
-              icon={collapsed ? <MenuUnfoldOutlined /> : <MenuFoldOutlined />}
-              onClick={() => setCollapsed(!collapsed)}
-              style={{
-                fontSize: '16px',
-                width: 64,
-                height: 64,
-              }}
-            />
-          {/* </Dropdown> */}
+          <Button
+            type="text"
+            icon={collapsed ? <MenuUnfoldOutlined /> : <MenuFoldOutlined />}
+            onClick={() => setCollapsed(!collapsed)}
+            style={{
+              fontSize: '16px',
+              width: 64,
+              height: 64,
+            }}
+          />
           <Breadcrumb />
         </Header>
+        {/* <Tabs /> */}
         <Content style={{ margin: '24px 16px 0' }}>
           <div style={{ padding: 24, background: colorBgContainer }}><Outlet /></div>
         </Content>

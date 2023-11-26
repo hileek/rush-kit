@@ -20,6 +20,7 @@ const routesSlice = createSlice({
     });
     builder.addCase(fetchRoutes.fulfilled, (state, action: PayloadAction<RouteType[]>) => {
       state.routes = [...staticRoutes, ...action.payload];
+      // state.routes = action.payload;
       state.loading = false;
     });
     builder.addCase(fetchRoutes.rejected, (state, action) => {

@@ -1,3 +1,5 @@
+import type { Option, MenuItem } from './app';
+
 export interface RouteType {
   path: string;
   component: string | null;
@@ -18,4 +20,18 @@ export interface RoutesState {
   routes: RouteType[];
   loading: boolean;
   error: string | null;
+}
+
+export interface BreadcrumbItem extends RouteType {
+  title?: ReactDOM;
+  menu?: {
+    items: MenuItem[]
+  };
+}
+
+export interface RouteState {
+  route: {
+    routes: RouteType[];
+    loading: boolean;
+  };
 }

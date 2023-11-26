@@ -1,13 +1,14 @@
 import Cookies from 'js-cookie';
-import { TOKEN_NAME } from './constants';
+import { TOKEN_NAME, TABS_NAME } from './constants';
+import type { Option } from '@/types/app';
+
+const getItem = (key: string, initialState: any = null) => {
+  const value = localStorage.getItem(key);
+  return value ? JSON.parse(value) : initialState;
+};
 
 const setItem = (key: string, value: any) => {
   localStorage.setItem(key, JSON.stringify(value));
-};
-
-const getItem = (key: string) => {
-  const value = localStorage.getItem(key);
-  return value ? JSON.parse(value) : null;
 };
 
 const removeItem = (key: string) => {
@@ -30,6 +31,10 @@ const removeToken = () => {
   Cookies.remove(TOKEN_NAME);
 };
 
+const getTabs = () => getItem(TABS_NAME, []);
+const setTabs = (value: Option[]) => setItem(TABS_NAME, value);
+const removeTabs = () => removeItem(TABS_NAME);
+
 const clear = () => {
   localStorage.clear();
 };
@@ -40,6 +45,9 @@ const storage = {
   isAuth,
   getToken,
   setToken,
+  getTabs,
+  setTabs,
+  removeTabs,
   removeToken,
   clear,
 };

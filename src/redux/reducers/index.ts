@@ -1,9 +1,10 @@
 import { combineReducers } from 'redux';
 import routeReducer from './routeReducer';
+import appReducer from './appReducer';
 
 const reducers = combineReducers({
   route: routeReducer,
-  // 可以添加其他模块的 reducer
+  app: appReducer,
 });
 
 export default reducers;

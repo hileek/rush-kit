@@ -19,13 +19,14 @@ const generateRoutes = (routes: RouteType[]): any => {
           {!Component ? generateRoutes(route.children) : (
             <Route
               path={route.path}
+              key={route.key}
               element={
                 <Suspense fallback={
                   <Spin tip="Loading">
                     <div className="content" />
                   </Spin>
                 }>
-                  <AuthRoute path={route.path}><Component /></AuthRoute>
+                  <AuthRoute path={route.path} title={route.title}><Component /></AuthRoute>
                   {/* <Component /> */}
                 </Suspense>
               }
@@ -39,21 +40,19 @@ const generateRoutes = (routes: RouteType[]): any => {
 };
 
 const Routes = () => {
-  // const dispatch = useDispatch();
-  // 使用 useSelector 获取存储在 Redux store 中的路由数据
   const { routes } = useSelector((state: any) => ({
     routes: state.route.routes,
     loading: state.route.loading,
   }));
   return (
     <RouterList>
-      <Route path="/" element={<AuthRoute path="/"><Layouts /></AuthRoute>}>
-        <Route path="/" element={<Navigate to={HOME_PATH} replace />} />
+      <Route path="/" element={<AuthRoute path="/" title="首页"><Layouts /></AuthRoute>}>
+        <Route path="/" key="home" element={<Navigate to={HOME_PATH} replace />} />
         {generateRoutes(routes)}
         {/* <RouteType path="/404" element={<NotFound />} /> */}
-        <Route path="*" element={<NotFound />} />
+        <Route path="*" element={<AuthRoute path="*" title="没找到此页面"><NotFound /></AuthRoute>} />
       </Route>
-      <Route path={LOGIN_PATH} element={<AuthRoute path={LOGIN_PATH}><Login /></AuthRoute>} />
+      <Route path={LOGIN_PATH} element={<AuthRoute path={LOGIN_PATH} title="欢迎登录"><Login /></AuthRoute>} />
       {/* <RouteType path="*" element={<Navigate to="/404" />} /> */}
     </RouterList>
   );
