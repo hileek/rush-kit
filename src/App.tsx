@@ -15,6 +15,6 @@ const App = () => {
     }
   }, [dispatch]);
   return <Routes />;
-}
+};
 
 export default App;

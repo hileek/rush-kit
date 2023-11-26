@@ -4,7 +4,7 @@ const translation = {
   '菜单管理': 'Menu',
   'greeting': 'Hello, {{name}}!',
   'button': 'Click me',
-  'a': 'hahha'
+  'a': 'hahha',
 };
 
 export default translation;

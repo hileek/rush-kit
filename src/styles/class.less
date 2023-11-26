@@ -13,7 +13,16 @@
   align-items: center;
 }
 
-.js-center {
+.jc-center {
+  justify-content: center;
+}
+.jc-between {
+  justify-content: space-between;
+}
+
+.flex-center {
+  display: flex;
+  align-items: center;
   justify-content: center;
 }
 // #endregion
@@ -45,7 +54,15 @@
 
 // 表示padding-top的值为2px-100px的偶数值的类，用法className="pt-30"，表示padding-top的值为30px
 .generate-variants(padding-top, pt, 2, 100);
+.generate-variants(padding-bottom, pb, 2, 100);
+.generate-variants(padding-left, pl, 2, 100);
+.generate-variants(padding-right, pr, 2, 100);
+
+.generate-variants(margin-top, mt, 2, 100);
+.generate-variants(margin-bottom, mb, 2, 100);
 .generate-variants(margin-left, ml, 2, 100);
+.generate-variants(margin-right, mr, 2, 100);
+
 // 用法font-14，表示font-size为14px
 .generate-variants(font-size, font, 14, 50);
 // #endregion

@@ -24,7 +24,7 @@ export default function listToTree(data: any[], parentId: string | number = 'par
     // 对应的父元素
     const parent = map[item[parentId]];
     if (parent) {
-      parent.children!.push(item);
+      parent.children?.push(item);
     } else {
       tree.push(item);
     }

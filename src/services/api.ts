@@ -24,7 +24,7 @@ api.interceptors.request.use(
 // 响应拦截器
 api.interceptors.response.use(
   (response) => {
-    console.log(response, 'response')
+    console.log(response, 'response');
     const { code, message, data } = response.data;
     if (code === 401 ) {
       // 调用登出接口，清除store

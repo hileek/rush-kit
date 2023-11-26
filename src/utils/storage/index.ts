@@ -1,6 +1,6 @@
 import Cookies from 'js-cookie';
-import { TOKEN_NAME, TABS_NAME } from './constants';
-import type { Option } from '@/types/app';
+import { TOKEN_NAME, TABS_NAME, LANGUAGE_NAME } from './constants';
+import type { Option, Language } from '@/types/app';
 
 const getItem = (key: string, initialState: any = null) => {
   const value = localStorage.getItem(key);
@@ -35,21 +35,26 @@ const getTabs = () => getItem(TABS_NAME, []);
 const setTabs = (value: Option[]) => setItem(TABS_NAME, value);
 const removeTabs = () => removeItem(TABS_NAME);
 
+const getLanguage = (): Language => getItem(LANGUAGE_NAME, 'zh');
+const setLanguage = (value: Language) => setItem(LANGUAGE_NAME, value);
+const removeLanguage = () => removeItem(LANGUAGE_NAME);
+
 const clear = () => {
   localStorage.clear();
 };
 
 export const isAuth = () => !!getToken();
 
-const storage = {
+export default {
+  clear,
   isAuth,
   getToken,
   setToken,
+  removeToken,
   getTabs,
   setTabs,
   removeTabs,
-  removeToken,
-  clear,
+  getLanguage,
+  setLanguage,
+  removeLanguage,
 };
-
-export default storage;

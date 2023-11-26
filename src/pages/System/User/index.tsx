@@ -3,6 +3,9 @@ import React, { useEffect } from 'react';
 
 const User = () => {
   console.log('user');
+  useEffect(() => {
+    console.log('用户');
+  }, []);
   return (
     <>user</>
   );

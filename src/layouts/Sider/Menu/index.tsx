@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import { useNavigate, useLocation } from 'react-router-dom';
 import * as Icon from '@ant-design/icons';
 import { Menu as AntMenu, MenuProps } from 'antd';
@@ -8,7 +8,6 @@ import { AntdIconProps } from '@ant-design/icons/lib/components/AntdIcon';
 import { RouteType, RouteState } from '@/types/route';
 import { useDispatch, useSelector } from 'react-redux';
 import { addTab } from '@/redux/actions/appActions';
-import { ADD_TAB } from '@/redux/constants/type';
 
 type MenuItem = Required<MenuProps>['items'][number];
 

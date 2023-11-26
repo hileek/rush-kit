@@ -17,12 +17,12 @@ const restoreChildrenById = (originalTree: TreeNode[], tree: TreeNode[], targetI
         ...treeNode,
         children: originalNode ?
           restoreChildrenById(originalNode.children, treeNode.children, targetId) :
-          treeNode.children
+          treeNode.children,
       };
     }
 
     return treeNode;
   });
-}
+};
 
 export default restoreChildrenById;

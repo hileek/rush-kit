@@ -6,3 +6,9 @@ export type Option = {
 };
 export type MenuItem = Required<MenuProps>['items'][number];
 
+export interface Action<T = any> {
+  type: string;
+  payload: T
+}
+
+export type Language = 'zh' | 'en';

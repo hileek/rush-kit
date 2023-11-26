@@ -47,7 +47,7 @@ const Login = () => {
     console.log('Received values:', values);
     // 在这里处理登录逻辑
     storage.setToken('123123');
-    dispatch(fetchRoutes() as any)
+    dispatch(fetchRoutes() as any);
     navigate('/new-route', { replace: true });
   };
 

@@ -16,6 +16,6 @@ const updateChildrenToEmptyArray = (tree: TreeNode[], targetId: number): TreeNod
 
     return node;
   });
-}
+};
 
 export default updateChildrenToEmptyArray;
