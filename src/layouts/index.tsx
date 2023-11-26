@@ -10,6 +10,13 @@ import Breadcrumb from './Header/Breadcrumb';
 import Tabs from './Header/Tabs';
 import getScreenType from '@/utils/getScreenType';
 import { ScreenType } from '@/types/app';
+import styled from 'styled-components';
+
+const Logo = styled.div`
+  width: 100%;
+  height: 64px;
+  background-image: url('/assets/image/logo.svg');
+`;
 
 const Layouts = () => {
   const { Header, Content, Footer, Sider } = Layout;
@@ -54,13 +61,14 @@ const Layouts = () => {
         breakpoint="md"
         collapsedWidth={collapsedWidthMap[screenType]}
         onCollapse={(collapsed, type) => {
-          collapsed && setCollapsed(collapsed)
+          collapsed && setCollapsed(collapsed);
         }}
         collapsible
         collapsed={collapsed}
         trigger={null}
       >
-        <div className="demo-logo-vertical" />
+        <Logo>
+        </Logo>
         <Menu />
       </Sider>
       <Layout>

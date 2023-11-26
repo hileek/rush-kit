@@ -15,9 +15,9 @@ const Tabs: React.FC = () => {
   const newTabIndex = useRef(0);
 
   const { tabs } = useSelector((state: any) => ({
-    tabs: state.app.tabs
+    tabs: state.app.tabs,
   }));
-console.log(tabs,'tabs')
+
   const onChange = (key: string) => {
     setActiveKey(key);
   };

@@ -20,5 +20,16 @@ module.exports = {
   rules: {
     'max-len': ['error', { 'code': 140, 'ignoreUrls': true, 'ignoreStrings': true, 'ignoreTemplateLiterals': true }],
     'quotes': ['error', 'single'],
+    'comma-dangle': [
+      'error',
+      {
+        arrays: 'always-multiline',
+        objects: 'always-multiline',
+        imports: 'always-multiline',
+        exports: 'always-multiline',
+        functions: 'never',
+      },
+    ],
+    'semi': ['error', 'always'],
   },
 };

@@ -36,7 +36,7 @@ const generateRoutes = (routes: RouteType[]): any => {
           )}
         </React.Fragment>
       );
-  })
+  });
 };
 
 const Routes = () => {

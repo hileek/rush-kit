@@ -23,7 +23,7 @@ const Breadcrumb: React.FC = () => {
     const getMenuItems = (routes: RouteType[]): MenuItem[] => {
       const menuItems = routes.map(route => ({
         key: route.id,
-        label: <Link to={route.path}>{route.title}</Link>
+        label: <Link to={route.path}>{route.title}</Link>,
       }));
       return menuItems;
     };
@@ -67,7 +67,7 @@ const Breadcrumb: React.FC = () => {
 
   const itemRender = (item: BreadcrumbItem, _: unknown, items: BreadcrumbItem[], paths: string[]) => {
     const last = items.indexOf(item) === items.length - 1;
-    console.log(paths,paths[paths.length - 1])
+    console.log(paths,paths[paths.length - 1]);
     return last ? <span>{item.title}</span> : <Link to={paths[paths.length - 1]}>{item.title}</Link>;
   };
 
@@ -79,7 +79,7 @@ const Breadcrumb: React.FC = () => {
     <>
       <AntBreadcrumb itemRender={itemRender as any} items={items} />
     </>
-  )
+  );
 };
 
 export default Breadcrumb;
