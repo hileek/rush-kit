@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import { useNavigate, useLocation } from 'react-router-dom';
-import { useTranslation } from 'react-i18next';
 import * as Icon from '@ant-design/icons';
 import { Menu as AntMenu, MenuProps, } from 'antd';
+import TranslatedText from '@/components/TranslatedText';
 
 import { AntdIconProps } from '@ant-design/icons/lib/components/AntdIcon';
 import { RouteType, RouteState } from '@/types/route';
@@ -20,7 +20,6 @@ interface Props {
 const Menu: React.FC = () => {
   const navigate = useNavigate();
   const location = useLocation();
-  const { t } = useTranslation();
   const dispatch = useDispatch();
   const current = location.pathname
 
@@ -42,14 +41,14 @@ const Menu: React.FC = () => {
 
       if (isExternalLink) {
         externalLinkMap[path] = true;
-        label = <a href={path} target="_blank" rel="noopener noreferrer">{t(label)}</a> as unknown as string;
+        label = <a href={path} target="_blank" rel="noopener noreferrer"><TranslatedText>{label}</TranslatedText></a> as unknown as string;
       }
 
       items.push({
         key: path,
         icon: IconComponent && <IconComponent />,
         children: children?.length ? generateItems(children) : undefined,
-        label: typeof label === 'string' ? t(label) : label,
+        label: typeof label === 'string' ? <TranslatedText>{label}</TranslatedText> : label,
         type,
       });
     }
