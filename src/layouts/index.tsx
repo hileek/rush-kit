@@ -4,7 +4,7 @@ import { Layout, theme } from 'antd';
 import Sider from './Sider';
 import Header from './Header';
 
-const Layouts = () => {
+const Layouts: React.FC = () => {
   const { Content, Footer } = Layout;
 
   const {

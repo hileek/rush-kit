@@ -1,7 +1,7 @@
 import React from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import styled from 'styled-components';
-import { Layout, theme, Button, Avatar } from 'antd';
+import { Layout, theme, Button, Avatar, Dropdown } from 'antd';
 import type { MenuProps } from 'antd';
 import {
   MenuFoldOutlined,
@@ -15,10 +15,14 @@ import Tabs from './Tabs';
 import TranslatedButton from './TranslatedButton';
 
 const Right = styled.div`
-  padding-right: 10px;
+  display: flex;
+  align-items: center;
+  >div {
+    margin-right: 20px;
+  }
 `;
 
-const Header = () => {
+const Header: React.FC = () => {
   const { collapsed } = useSelector((state: any) => ({
     collapsed: state.app.collapsed,
   }));
@@ -28,25 +32,6 @@ const Header = () => {
   const {
     token: { colorBgContainer },
   } = theme.useToken();
-
-  const items: MenuProps['items'] = [
-    {
-      key: '1',
-      label: (
-        <a target="_blank" rel="noopener noreferrer" href="https://www.antgroup.com">
-          1st menu item
-        </a>
-      ),
-    },
-    {
-      key: '2',
-      label: (
-        <a target="_blank" rel="noopener noreferrer" href="https://www.aliyun.com">
-          2nd menu item
-        </a>
-      ),
-    },
-  ];
 
   return (
     <>
@@ -64,10 +49,14 @@ const Header = () => {
           />
           <Breadcrumb />
         </div>
-        <div className="flex-center pr-10">
+        <Right>
           <TranslatedButton />
-          <Avatar style={{ verticalAlign: 'middle' }} size="large" gap={1}>姚海雄</Avatar>
-        </div>
+          <div>
+            <Dropdown menu={{ items: [{ key: '1', label: '退出登录' }] }}>
+              <Avatar style={{ verticalAlign: 'middle' }} gap={2}>姚海雄</Avatar>
+            </Dropdown>
+          </div>
+        </Right>
       </Layout.Header>
       {/* <Tabs /> */}
     </>

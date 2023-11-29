@@ -1,4 +1,4 @@
-import { Option, Action } from '@/types/app';
+import { Option, Action, ScreenType } from '@/types/app';
 import { SET_TABS, ADD_TAB, SET_SCREEN_TYPE, SET_COLLAPSED } from '../constants/type';
 
 export const setTabs = (tabs: Option[]): Action<Option[]> => {
@@ -15,7 +15,7 @@ export const addTab = (tab: Option): Action<Option> => {
   };
 };
 
-export const setScreenType = (screenType: string): Action<string> => {
+export const setScreenType = (screenType: ScreenType): Action<ScreenType> => {
   return {
     type: SET_SCREEN_TYPE,
     payload: screenType,

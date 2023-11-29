@@ -5,6 +5,7 @@ import { useLocation, Link } from 'react-router-dom';
 import type { RouteType, BreadcrumbItem, RouteState } from '@/types/route';
 import type { MenuItem } from '@/types/app';
 import { HOME_PATH } from '@/routes/constans';
+import TranslatedText from '@/components/TranslatedText';
 
 const Breadcrumb: React.FC = () => {
   const location = useLocation();
@@ -18,12 +19,12 @@ const Breadcrumb: React.FC = () => {
 
   // 生成面包屑数组
   const findBreadcrumbItems = (routes: RouteType[], currentPath: string): BreadcrumbItem[] => {
-    const result: BreadcrumbItem[] = [{ title: '首页', path: HOME_PATH }] as BreadcrumbItem[];
+    const result: BreadcrumbItem[] = [{ title: <TranslatedText>首页</TranslatedText>, path: HOME_PATH }] as BreadcrumbItem[];
 
     const getMenuItems = (routes: RouteType[]): MenuItem[] => {
       const menuItems = routes.map(route => ({
         key: route.id,
-        label: <Link to={route.path}>{route.title}</Link>,
+        label: <Link to={route.path}><TranslatedText>{route.title}</TranslatedText></Link>,
       }));
       return menuItems;
     };
@@ -33,7 +34,7 @@ const Breadcrumb: React.FC = () => {
       // 下拉菜单
       const item: BreadcrumbItem = {
         ...route,
-        title: route.title,
+        title: <TranslatedText>{route.title}</TranslatedText>,
         menu: hasChildren ? { items: getMenuItems(route.children) } : undefined,
       };
 

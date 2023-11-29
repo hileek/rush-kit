@@ -1,11 +1,13 @@
 import axios from 'axios';
 import React, { useEffect } from 'react';
 
-const User = () => {
+const User: React.FC = () => {
   console.log('user');
+
   useEffect(() => {
     console.log('用户');
   }, []);
+
   return (
     <>user</>
   );

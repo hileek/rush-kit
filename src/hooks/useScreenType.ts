@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react';
 import getScreenType from '@/utils/getScreenType';
 import type { ScreenType } from '@/types/app';
 
-function useScreenType(): ScreenType {
+const useScreenType = (): ScreenType => {
   const [screenType, setScreenType] = useState<ScreenType>(getScreenType());
 
   useEffect(() => {
@@ -18,7 +18,8 @@ function useScreenType(): ScreenType {
       window.removeEventListener('resize', handleResize);
     };
   }, []);
+
   return screenType;
-}
+};
 
 export default useScreenType;

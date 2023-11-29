@@ -18,7 +18,7 @@ const initialState: Init = {
   collapsed: initScreeType !== 'large',
 };
 
-const appReducer = (state: Init = initialState, action: Action<Option & Option[] & boolean & ScreenType>): Init => {
+const appReducer = (state: Init = initialState, action: Action): Init => {
   switch (action.type) {
     case SET_TABS:
       return {
@@ -26,11 +26,11 @@ const appReducer = (state: Init = initialState, action: Action<Option & Option[]
         tabs: action.payload,
       };
     case ADD_TAB:
-      // if (state.tabs.find(tab => tab.key === action.payload.key)) {
-      //   return {
-      //     ...state,
-      //   };
-      // }
+      if (state.tabs.find(tab => tab.key === action.payload.key)) {
+        return {
+          ...state,
+        };
+      }
       return {
         ...state,
         tabs: [...state.tabs, action.payload],

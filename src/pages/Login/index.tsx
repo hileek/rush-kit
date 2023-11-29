@@ -1,5 +1,3 @@
-// Login.js
-
 import React from 'react';
 import { useNavigate } from 'react-router';
 import { Form, Input, Button, Checkbox } from 'antd';
@@ -39,7 +37,7 @@ const Wrapper = styled.div`
   }
 `;
 
-const Login = () => {
+const Login: React.FC = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
@@ -48,11 +46,11 @@ const Login = () => {
     // 在这里处理登录逻辑
     storage.setToken('123123');
     dispatch(fetchRoutes() as any);
-    navigate('/new-route', { replace: true });
+    navigate('/', { replace: true });
   };
 
   return (
-    <Wrapper className="login-container">
+    <Wrapper>
       <Form
         name="login-form"
         className="login-form"

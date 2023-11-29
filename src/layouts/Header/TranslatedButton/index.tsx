@@ -40,16 +40,12 @@ const Wrap = styled.div`
   }
 `;
 
-const TranslatedButton = () => {
+const TranslatedButton: React.FC = () => {
 
   const [current, setCurrent] = useState(storage.getLanguage());
   const { i18n } = useTranslation();
 
   const changeLanguage = () => {
-    const map = {
-      zh: 'en',
-      en: 'zh',
-    };
     const language = current === 'zh' ? 'en' : 'zh';
     i18n.changeLanguage(language);
     setCurrent(language);

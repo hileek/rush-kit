@@ -9,7 +9,11 @@ for (const key in translation) {
   translationZH[key] = key;
 }
 
-const resources = {
+type Translation = {
+  translation: Record<string, string>;
+};
+
+const resources:Record<string, Translation> = {
   en: {
     translation,
   },

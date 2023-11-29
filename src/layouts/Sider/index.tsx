@@ -13,7 +13,7 @@ const Logo = styled.div`
   background-image: url('/assets/image/logo.svg');
 `;
 
-const Sider = () => {
+const Sider: React.FC = () => {
   const dispatch = useDispatch();
   const screenType =useScreenType();
 
