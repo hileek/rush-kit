@@ -1,83 +1,51 @@
-import React, { useState } from 'react';
-import { Form, Button } from 'antd';
-import componentMap from './Components';
+import React, { Fragment } from 'react';
+import { Form } from 'antd';
+import Components from './Components';
 
-interface ComponentMap {
-  text: React.LazyExoticComponent<React.ComponentType<any>>;
-  select: React.LazyExoticComponent<React.ComponentType<any>>;
-  checkbox: React.LazyExoticComponent<React.ComponentType<any>>;
-}
+const renderFormItem = (field: Field, getFieldsValue: () => Record<string, string> | void) => {
+  const { type, label, name,  condition, ...restProps } = field;
+  const Component = Components[type];
 
-type RecordType = Record<string, any>;
-
-interface FormItem {
-  type: keyof ComponentMap;
-  label: string;
-  name: string;
-  condition?: (records: RecordType) => boolean;
-  [key: string]: any;
-}
-
-interface DynamicFormProps {
-  formConfig: FormItem[];
-  onSubmit: (values: any) => void;
-}
-
-const DynamicForm: React.FC<DynamicFormProps> = ({ formConfig, onSubmit }) => {
-  const [form] = Form.useForm();
-
-  const [forceUpdateFlag, setForceUpdateFlag] = useState(false);
-
-  const shouldRenderComponent = (condition: ((records: RecordType) => boolean) | undefined, records: RecordType) => {
-    if (typeof condition === 'function') {
-      return condition(records);
-    }
-    return true;
-  };
-
-  const renderFormItem = (item: FormItem, index: number, records: RecordType) => {
-    const { type, label, name, condition, ...restProps } = item;
-
-    if (!shouldRenderComponent(condition, records)) {
-      return null;
-    }
-
-    const Component = componentMap[type];
-    console.log(item)
-
+  if (!condition || typeof condition !== 'function') {
     return (
-      <Form.Item key={name} label={label} name={name} {...restProps}>
-        <React.Suspense fallback={null}>
-          <Component />
-        </React.Suspense>
+      <Form.Item name={name} label={label} rules={[{ required: true }]}>
+        <Component {...restProps} />
       </Form.Item>
     );
-  };
+  }
 
-  const renderFormItems = () => {
-    const records: FormItem[] = [];
-    return formConfig.map((item, index) => {
-      const formItem = renderFormItem(item, index, form.getFieldsValue(true));
-      if (formItem) {
-        records.push(item);
-      }
-      return formItem;
-    });
-  };
-
-  const handleInputChange = () => {
-    setForceUpdateFlag(!forceUpdateFlag);
-  };
-
+  const isRender = condition(getFieldsValue());
 
   return (
-    <Form form={form} onFinish={onSubmit} onValuesChange={handleInputChange} initialValues={{username: '1'}}>
-      {renderFormItems()}
-      <Form.Item>
-        <Button type="primary" htmlType="submit">
-          Submit
-        </Button>
+    isRender && (
+      <Form.Item name={name} label={label} rules={[{ required: true }]}>
+        <Component  {...restProps} />
       </Form.Item>
+    )
+  );
+};
+
+interface DynamicFormProps {
+  fields: Field[];
+  onSubmit: (values: Record<string, string>) => void;
+}
+
+const DynamicForm: React.FC<DynamicFormProps> = ({ fields, onSubmit }) => {
+  const [form] = Form.useForm();
+
+  return (
+    <Form form={form} onFinish={onSubmit}>
+      {fields.map((field) => (
+        <Fragment key={field.name}>
+          <Form.Item
+            noStyle
+            // shouldUpdate={field.shouldUpdate || (() => false)}
+            shouldUpdate={() => true}
+          >
+            {({ getFieldsValue }) => renderFormItem(field, getFieldsValue)}
+          </Form.Item>
+        </Fragment>
+      ))}
     </Form>
   );
 };

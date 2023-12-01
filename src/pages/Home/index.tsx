@@ -43,25 +43,33 @@
 import React from 'react';
 import DynamicForm from '@/components/DynamicForm';
 
-const MyFormContainer: React.FC = () => {
+const Home: React.FC = () => {
   const handleSubmit = (values: any) => {
-    // Handle form submission logic here
     console.log('Form values:', values);
   };
-  const condition = (record) => {
-    return record.username === '123';
-  };
-  const formConfig = [
-    { type: 'text', label: 'Username', name: 'username' },
-    { type: 'select', label: 'City', name: 'city', options: [{ label: 'New York', value: 'NY' } ], condition },
+
+  const formConfig: Field[] = [
+    {
+      type: 'select',
+      label: 'City',
+      name: 'city',
+      options: [{ label: 'New York', value: 'NY' }, { label: 'New', value: 'N' }],
+    },
+    {
+      type: 'text',
+      label: 'Username',
+      name: 'username',
+      condition: (record) =>  (record?.city === 'N'),
+      shouldUpdate: (prevValues, curValues) => prevValues.city !== curValues.city,
+    },
   ];
 
   return (
     <div>
       <h1>Dynamic Form Example</h1>
-      <DynamicForm formConfig={formConfig} onSubmit={handleSubmit} />
+      <DynamicForm fields={formConfig} onSubmit={handleSubmit} />
     </div>
   );
 };
 
-export default MyFormContainer;
+export default Home;

@@ -1,6 +1,6 @@
-import React, { lazy, ReactNode, forwardRef, ForwardedRef, MutableRefObject } from 'react';
+import React, { lazy } from 'react';
 
-const componentMap: Record<
+const Components: Record<
   string,
   React.LazyExoticComponent<React.ComponentType<any>>
 > = {
@@ -19,31 +19,4 @@ const componentMap: Record<
   colorPicker: lazy(() => import('antd/es/color-picker')),
 };
 
-function wrapAntdComponent(
-  component: React.LazyExoticComponent<React.ComponentType<any>>
-): React.ForwardRefExoticComponent<any> {
-  const WrappedComponent = forwardRef(
-    (
-      { children, ...rest }: { children?: ReactNode; [key: string]: any },
-      ref: ForwardedRef<MutableRefObject<any> | null>
-    ) => {
-      const Component = React.lazy(() => component);
-      return (
-        <React.Suspense fallback={null}>
-          <Component {...rest} ref={ref} />
-        </React.Suspense>
-      );
-    }
-  );
-
-  WrappedComponent.displayName = 'AntdLazyLoadComponent';
-
-  return WrappedComponent;
-}
-
-const lazyLoadComponentMap: Record<string, React.ForwardRefExoticComponent<any>> = {};
-Object.keys(componentMap).forEach((key) => {
-  lazyLoadComponentMap[key] = wrapAntdComponent(componentMap[key]);
-});
-
-export default componentMap;
+export default Components;
