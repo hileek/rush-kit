@@ -7,6 +7,11 @@ const translation: Record<string, string> = {
   'greeting': 'Hello, {{name}}!',
   'button': 'Click me',
   'a': 'hahha',
+  '数据库管理': 'Database',
+  '接口管理': 'Interface',
+  '任务调度': 'TaskScheduling',
+  '定时任务': 'ScheduledTasks',
+  '任务日志': 'MissionLog',
 };
 
 export default translation;

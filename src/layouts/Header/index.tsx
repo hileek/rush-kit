@@ -2,11 +2,9 @@ import React from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import styled from 'styled-components';
 import { Layout, theme, Button, Avatar, Dropdown } from 'antd';
-import type { MenuProps } from 'antd';
 import {
   MenuFoldOutlined,
   MenuUnfoldOutlined,
-  TranslationOutlined,
 } from '@ant-design/icons';
 
 import { setCollapsed } from '@/redux/actions/appActions';
