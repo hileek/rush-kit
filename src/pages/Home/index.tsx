@@ -1,5 +1,6 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import DynamicForm from '@/components/DynamicForm';
+import domToPDF from '@/utils/domToPDF';
 
 const Home: React.FC = () => {
   const handleSubmit = (values: any) => {
@@ -21,11 +22,17 @@ const Home: React.FC = () => {
       shouldUpdate: (prevValues, curValues) => prevValues.city !== curValues.city,
     },
   ];
+  useEffect(() => {
+    domToPDF(document.getElementsByClassName('ant-menu')[0]);
+  }, []);
 
   return (
     <div>
       <h1>Dynamic Form Example</h1>
       <DynamicForm fields={formConfig} onSubmit={handleSubmit} />
+      <div>
+        <div id='a'></div>
+      </div>
     </div>
   );
 };
