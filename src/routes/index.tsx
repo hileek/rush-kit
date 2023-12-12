@@ -27,7 +27,6 @@ const generateRoutes = (routes: RouteType[]): any => {
                   </Spin>
                 }>
                   <AuthRoute path={route.path} title={route.title}><Component /></AuthRoute>
-                  {/* <Component /> */}
                 </Suspense>
               }
             >

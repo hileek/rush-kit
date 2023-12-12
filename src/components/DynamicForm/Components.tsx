@@ -1,11 +1,25 @@
-import React, { lazy } from 'react';
+import React, { lazy, Suspense, createElement, ComponentType } from 'react';
 
-const Components: Record<
-  string,
-  React.LazyExoticComponent<React.ComponentType<any>>
-> = {
+type FormType =
+  | 'text'
+  | 'password'
+  | 'select'
+  | 'checkbox'
+  | 'radio'
+  | 'datePicker'
+  | 'inputNumber'
+  | 'treeSelect'
+  | 'cascader'
+  | 'switch'
+  | 'upload'
+  | 'slider'
+  | 'colorPicker';
+
+type ComponentsType = Record<FormType, React.LazyExoticComponent<ComponentType<any>>>;
+
+const Components: ComponentsType = {
   text: lazy(() => import('antd/es/input')),
-  // password: lazy(() => import('antd/es/input').then(module => ({ default: module.Password }))),
+  password: lazy(() => import('antd/es/input').then(module => ({ default: module.Password } as any))),
   select: lazy(() => import('antd/es/select')),
   checkbox: lazy(() => import('antd/es/checkbox')),
   radio: lazy(() => import('antd/es/radio')),
@@ -19,4 +33,15 @@ const Components: Record<
   colorPicker: lazy(() => import('antd/es/color-picker')),
 };
 
-export default Components;
+const SuspenseComponents: ComponentsType = Object.fromEntries(
+  Object.entries(Components).map(([key, value]) => [
+    key,
+    (props) => (
+      <Suspense fallback={null}>
+        {createElement(value, props)}
+      </Suspense>
+    ),
+  ])
+);
+
+export default SuspenseComponents;

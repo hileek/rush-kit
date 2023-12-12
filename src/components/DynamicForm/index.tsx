@@ -1,51 +1,42 @@
-import React, { Fragment } from 'react';
-import { Form } from 'antd';
+import React, { createElement, Fragment } from 'react';
+import { Form, FormProps, Input } from 'antd';
 import Components from './Components';
-
-const renderFormItem = (field: Field, getFieldsValue: () => Record<string, string> | void) => {
-  const { type, label, name,  condition, ...restProps } = field;
-  const Component = Components[type];
-
-  if (!condition || typeof condition !== 'function') {
-    return (
-      <Form.Item name={name} label={label} rules={[{ required: true }]}>
-        <Component {...restProps} />
-      </Form.Item>
-    );
-  }
-
-  const isRender = condition(getFieldsValue());
-
-  return (
-    isRender && (
-      <Form.Item name={name} label={label} rules={[{ required: true }]}>
-        <Component  {...restProps} />
-      </Form.Item>
-    )
-  );
-};
-
-interface DynamicFormProps {
+interface DynamicFormProps extends FormProps {
   fields: Field[];
   onSubmit: (values: Record<string, string>) => void;
 }
 
-const DynamicForm: React.FC<DynamicFormProps> = ({ fields, onSubmit }) => {
+const DynamicForm: React.FC<DynamicFormProps> = ({ fields, onFinish }) => {
   const [form] = Form.useForm();
 
   return (
-    <Form form={form} onFinish={onSubmit}>
-      {fields.map((field) => (
-        <Fragment key={field.name}>
-          <Form.Item
-            noStyle
-            // shouldUpdate={field.shouldUpdate || (() => false)}
-            shouldUpdate={() => true}
-          >
-            {({ getFieldsValue }) => renderFormItem(field, getFieldsValue)}
+    <Form form={form} onFinish={onFinish}>
+      {fields.map((field) => {
+        const { name, label, rules, type, condition, shouldUpdate, componentProps } = field;
+        const Component = Components[type];
+
+        if (condition) {
+          return ( 
+            <Form.Item
+              noStyle
+              key={name}
+              shouldUpdate={shouldUpdate || (() => false)}
+            >
+              {({ getFieldsValue }) => 
+                condition(getFieldsValue()) ? (
+                  <Form.Item  name={name} label={label} rules={rules || []}>
+                    <Component { ...componentProps } />
+                  </Form.Item>
+                ) : null}
+            </Form.Item>
+          );
+        }
+        return (
+          <Form.Item key={name} name={name} label={label} rules={rules || []}>
+            <Component { ...componentProps } />
           </Form.Item>
-        </Fragment>
-      ))}
+        );
+      })}
     </Form>
   );
 };
