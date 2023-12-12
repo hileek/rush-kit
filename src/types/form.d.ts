@@ -1,11 +1,26 @@
-import type { FormRule } from 'antd';
+import type { FormRule, ColProps } from 'antd';
 declare global {
   interface Option {
     label: string;
     value: string;
   }
-
-  type FormType = 'text' | 'select' | 'checkbox' | 'radio' | 'datePicker' | 'inputNumber' | 'treeSelect' | 'cascader' | 'upload' | 'switch' | 'slider' | 'colorPicker'
+  type FormType =
+  | 'Input'
+  | 'Group'
+  | 'TextArea'
+  | 'Search'
+  | 'Password'
+  | 'Select'
+  | 'Checkbox'
+  | 'Radio'
+  | 'DatePicker'
+  | 'InputNumber'
+  | 'TreeSelect'
+  | 'Switch'
+  | 'Upload'
+  | 'Cascader'
+  | 'Slider'
+  | 'ColorPicker';
   interface Field {
     type: FormType;
     label: string;
@@ -15,6 +30,7 @@ declare global {
     shouldUpdate?: (prevValues: any, curValues: any) => boolean;
     rules?: FormRule[];
     componentProps?: Record<any, any>;
+    colProps?: ColProps;
   }
 }
 export {};

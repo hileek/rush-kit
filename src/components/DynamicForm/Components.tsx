@@ -1,40 +1,30 @@
 import React, { lazy, Suspense, createElement, ComponentType } from 'react';
 
-type FormType =
-  | 'text'
-  | 'password'
-  | 'select'
-  | 'checkbox'
-  | 'radio'
-  | 'datePicker'
-  | 'inputNumber'
-  | 'treeSelect'
-  | 'cascader'
-  | 'switch'
-  | 'upload'
-  | 'slider'
-  | 'colorPicker';
+
 
 type ComponentsType = Record<FormType, React.LazyExoticComponent<ComponentType<any>>>;
 
-const Components: ComponentsType = {
-  text: lazy(() => import('antd/es/input')),
-  password: lazy(() => import('antd/es/input').then(module => ({ default: module.Password } as any))),
-  select: lazy(() => import('antd/es/select')),
-  checkbox: lazy(() => import('antd/es/checkbox')),
-  radio: lazy(() => import('antd/es/radio')),
-  datePicker: lazy(() => import('antd/es/date-picker')),
-  inputNumber: lazy(() => import('antd/es/input-number')),
-  treeSelect: lazy(() => import('antd/es/tree-select')),
-  cascader: lazy(() => import('antd/es/cascader')),
-  switch: lazy(() => import('antd/es/switch')),
-  upload: lazy(() => import('antd/es/upload')),
-  slider: lazy(() => import('antd/es/slider')),
-  colorPicker: lazy(() => import('antd/es/color-picker')),
+const LazyComponents: ComponentsType = {
+  Input: lazy(() => import('antd/es/input')),
+  Group: lazy(() => import('antd/es/input/Group')),
+  TextArea: lazy(() => import('antd/es/input/TextArea')),
+  Search: lazy(() => import('antd/es/input/Search')),
+  Password: lazy(() => import('antd/es/input/Password')),
+  Select: lazy(() => import('antd/es/select')),
+  Checkbox: lazy(() => import('antd/es/checkbox')),
+  Radio: lazy(() => import('antd/es/radio/group')),
+  DatePicker: lazy(() => import('antd/es/date-picker')),
+  InputNumber: lazy(() => import('antd/es/input-number')),
+  TreeSelect: lazy(() => import('antd/es/tree-select')),
+  Cascader: lazy(() => import('antd/es/cascader')),
+  Switch: lazy(() => import('antd/es/switch')),
+  Upload: lazy(() => import('antd/es/upload')),
+  Slider: lazy(() => import('antd/es/slider')),
+  ColorPicker: lazy(() => import('antd/es/color-picker')),
 };
 
-const SuspenseComponents: ComponentsType = Object.fromEntries(
-  Object.entries(Components).map(([key, value]) => [
+const Components: ComponentsType = Object.fromEntries(
+  Object.entries(LazyComponents).map(([key, value]) => [
     key,
     (props) => (
       <Suspense fallback={null}>
@@ -44,4 +34,4 @@ const SuspenseComponents: ComponentsType = Object.fromEntries(
   ])
 );
 
-export default SuspenseComponents;
+export default Components;

@@ -8,7 +8,7 @@ const Home: React.FC = () => {
 
   const formConfig: Field[] = [
     {
-      type: 'select',
+      type: 'Select',
       label: 'City',
       name: 'city',
       componentProps: {
@@ -16,17 +16,20 @@ const Home: React.FC = () => {
       },
     },
     {
-      type: 'text',
+      type: 'Input',
       label: 'Username',
       name: 'username',
       condition: (record) =>  (record?.city === 'N'),
+      componentProps: {
+        placeholder: '输入999',
+      },
       shouldUpdate: (prevValues, curValues) => {
         console.log(curValues, 'curValues', prevValues.city !== curValues.city);
         return prevValues.city !== curValues.city;
       },
     },
     {
-      type: 'radio',
+      type: 'Radio',
       label: 'Gender',
       name: 'gender',
       condition: (record) =>  (record?.username === '999'),
@@ -36,7 +39,7 @@ const Home: React.FC = () => {
       shouldUpdate: (prevValues, curValues) => prevValues.username !== curValues.username,
     },
     {
-      type: 'radio',
+      type: 'Slider',
       label: '动物',
       name: 'animal',
       condition: (record) =>  (record?.gender > 0),

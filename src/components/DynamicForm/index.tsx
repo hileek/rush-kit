@@ -1,42 +1,49 @@
-import React, { createElement, Fragment } from 'react';
-import { Form, FormProps, Input } from 'antd';
+import React from 'react';
+import { Col, Form, FormProps, Row, RowProps } from 'antd';
 import Components from './Components';
 interface DynamicFormProps extends FormProps {
   fields: Field[];
+  rowProps?: RowProps;
   onSubmit: (values: Record<string, string>) => void;
 }
 
-const DynamicForm: React.FC<DynamicFormProps> = ({ fields, onFinish }) => {
+const DynamicForm: React.FC<DynamicFormProps> = ({ fields, onFinish, rowProps = {} }) => {
   const [form] = Form.useForm();
 
   return (
     <Form form={form} onFinish={onFinish}>
-      {fields.map((field) => {
-        const { name, label, rules, type, condition, shouldUpdate, componentProps } = field;
-        const Component = Components[type];
+      <Row { ...rowProps }>
+        {fields.map((field) => {
+          const { name, label, type, condition, shouldUpdate, rules = [], componentProps = {}, colProps = { span: 24 } } = field;
+          const Component = Components[type];
 
-        if (condition) {
-          return ( 
-            <Form.Item
-              noStyle
-              key={name}
-              shouldUpdate={shouldUpdate || (() => false)}
-            >
-              {({ getFieldsValue }) => 
-                condition(getFieldsValue()) ? (
-                  <Form.Item  name={name} label={label} rules={rules || []}>
-                    <Component { ...componentProps } />
-                  </Form.Item>
-                ) : null}
-            </Form.Item>
+          if (condition) {
+            return ( 
+              <Form.Item
+                noStyle
+                key={name}
+                shouldUpdate={shouldUpdate || true}
+              >
+                {({ getFieldsValue }) => 
+                  condition(getFieldsValue()) ? (
+                    <Col { ...colProps }>
+                      <Form.Item name={name} label={label} rules={rules}>
+                        <Component { ...componentProps } />
+                      </Form.Item>
+                    </Col>
+                  ) : null}
+              </Form.Item>
+            );
+          }
+          return (
+            <Col { ...colProps } key={name}>
+              <Form.Item name={name} label={label} rules={rules}>
+                <Component { ...componentProps } />
+              </Form.Item>
+            </Col>
           );
-        }
-        return (
-          <Form.Item key={name} name={name} label={label} rules={rules || []}>
-            <Component { ...componentProps } />
-          </Form.Item>
-        );
-      })}
+        })}
+      </Row>
     </Form>
   );
 };
