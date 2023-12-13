@@ -2,13 +2,20 @@
   "name": "rush-kit",
   "version": "0.1.0",
   "private": true,
+  "husky": {
+    "hooks": {
+      "pre-commit": "lint-staged",
+      "pre-push": "npm run fix"
+    }
+  },
   "scripts": {
     "start": "node scripts/start.js",
     "build": "node scripts/build.js",
     "test": "node scripts/test.js",
     "mock": "json-server --watch mock/database.json --port 5555",
     "lint": "eslint src --ext .js,.jsx,.ts,.tsx",
-    "fix": "eslint --cache --max-warnings 0  \"{src,mock,build}/**/*.{js,ts,tsx}\" --fix"
+    "fix": "eslint --cache --max-warnings 0  \"{src,mock,build}/**/*.{js,ts,tsx}\" --fix",
+    "lint-staged": "lint-staged"
   },
   "dependencies": {
     "@babel/core": "^7.16.0",
@@ -160,6 +167,18 @@
     "@babel/plugin-proposal-private-property-in-object": "^7.21.11",
     "@types/js-cookie": "^3.0.6",
     "eslint": "^8.54.0",
-    "eslint-plugin-import": "^2.29.0"
+    "eslint-plugin-import": "^2.29.0",
+    "husky": "^8.0.3",
+    "lint-staged": "^15.2.0"
+  },
+  "lint-staged": {
+    "*.{js,jsx}": [
+      "eslint --fix",
+      "git add"
+    ],
+    "*.{css,scss}": [
+      "stylelint --fix",
+      "git add"
+    ]
   }
 }
