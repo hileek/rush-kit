@@ -141,6 +141,16 @@
     "message":"操作成功",
     "permissions": "system/user:read:update:delete:add:move,system/menu:read:update:delete:add:move,"
   },
+  "dept": [
+    {
+      "id": "list",
+      "list": {
+        "code": 200,
+        "message":"操作成功",
+        "permissions": "system/user:read:update:delete:add:move,system/menu:read:update:delete:add:move,"
+      }
+    }
+  ],
   "userList": [
     {
       "id": 1

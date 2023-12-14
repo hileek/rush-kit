@@ -1,8 +1,8 @@
-import React, { lazy, Suspense, createElement, ComponentType } from 'react';
-
-
+import React, { lazy, Suspense, createElement, ComponentType, ReactElement } from 'react';
 
 type ComponentsType = Record<FormType, React.LazyExoticComponent<ComponentType<any>>>;
+
+type ComponentGenerator = (props: any) => ReactElement;
 
 const LazyComponents: ComponentsType = {
   Input: lazy(() => import('antd/es/input')),
@@ -23,7 +23,7 @@ const LazyComponents: ComponentsType = {
   ColorPicker: lazy(() => import('antd/es/color-picker')),
 };
 
-const Components: ComponentsType = Object.fromEntries(
+const Components: Record<FormType, ComponentGenerator> = Object.fromEntries(
   Object.entries(LazyComponents).map(([key, value]) => [
     key,
     (props) => (
@@ -32,6 +32,6 @@ const Components: ComponentsType = Object.fromEntries(
       </Suspense>
     ),
   ])
-);
+) as Record<FormType, ComponentGenerator>;
 
 export default Components;

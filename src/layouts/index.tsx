@@ -19,7 +19,7 @@ const Layouts: React.FC = () => {
         <Content style={{ margin: '24px 16px 0' }}>
           <div style={{ padding: 24, background: colorBgContainer }}><Outlet /></div>
         </Content>
-        <Footer className="text-center">Ant Design ©2023 Created by Ant UED</Footer>
+        <Footer className="text-center">Rush Kit ©2023 Created by PEEK</Footer>
       </Layout>
     </Layout>
   );

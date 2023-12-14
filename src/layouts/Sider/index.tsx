@@ -10,7 +10,9 @@ import useScreenType from '@/hooks/useScreenType';
 const Logo = styled.div`
   width: 100%;
   height: 64px;
-  background-image: url('/assets/image/logo.svg');
+  line-height: 64px;
+  text-align: center;
+  font-size: 24px;
 `;
 
 const Sider: React.FC = () => {
@@ -46,9 +48,12 @@ const Sider: React.FC = () => {
       collapsible
       collapsed={collapsed}
       trigger={null}
+      theme="light"
+      style={{
+        overflow: 'auto',
+      }}
     >
-      <Logo>
-      </Logo>
+      <Logo>Rush Kit</Logo>
       <Menu />
     </Layout.Sider>
   );

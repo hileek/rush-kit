@@ -3,6 +3,11 @@ declare global {
     label: string;
     value: string;
   }
+
+  interface Item {
+    key: string;
+    label: string;
+  }
 }
 
 export {};

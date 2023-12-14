@@ -59,7 +59,6 @@ const Menu: React.FC = () => {
   
   return (
     <AntMenu
-      theme="dark"
       mode="inline"
       selectedKeys={[current]}
       items={items}

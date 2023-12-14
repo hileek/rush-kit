@@ -48,6 +48,13 @@ const Home: React.FC = () => {
       },
       shouldUpdate: (prevValues, curValues) => prevValues.gender !== curValues.gender,
     },
+    {
+      type: 'ColorPicker',
+      label: '颜色',
+      name: 'color',
+      condition: (record) =>  (record?.animal > 40),
+      shouldUpdate: (prevValues, curValues) => prevValues.animal !== curValues.animal,
+    },
   ];
 
   return (

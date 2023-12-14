@@ -1,7 +1,7 @@
 import React from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import styled from 'styled-components';
-import { Layout, theme, Button, Avatar, Dropdown } from 'antd';
+import { Layout, theme, Button, Avatar, Dropdown, MenuProps } from 'antd';
 import {
   MenuFoldOutlined,
   MenuUnfoldOutlined,
@@ -12,11 +12,25 @@ import Breadcrumb from './Breadcrumb';
 import Tabs from './Tabs';
 import TranslatedButton from './TranslatedButton';
 
-const Right = styled.div`
+interface WrapProps {
+  bg?: string;
+}
+
+const Wrap = styled(Layout.Header)<WrapProps>`
   display: flex;
   align-items: center;
-  >div {
-    margin-right: 20px;
+  justify-content: space-between;
+  padding: 0;
+  background-color: ${props => props.bg};
+  margin: 10px 16px -10px;
+  border-radius: 10px;
+
+  .right {
+    display: flex;
+    align-items: center;
+    >div {
+      margin-right: 20px;
+    }
   }
 `;
 
@@ -31,9 +45,23 @@ const Header: React.FC = () => {
     token: { colorBgContainer },
   } = theme.useToken();
 
+  type Key = 'logout';
+
+  const map: Record<Key, () => void> = {
+    logout: () => {
+      console.log('logout');
+    },
+  };
+
+  const items: Item[] = [{ key: 'logout', label: '退出登录' }];
+  
+  const itemClick: MenuProps['onClick'] = ({ key }) => {
+    map[key as Key]();
+  };
+
   return (
     <>
-      <Layout.Header style={{ padding: 0, background: colorBgContainer }} className="flex ai-center jc-between">
+      <Wrap bg={colorBgContainer}>
         <div className="flex ai-center">
           <Button
             type="text"
@@ -47,15 +75,15 @@ const Header: React.FC = () => {
           />
           <Breadcrumb />
         </div>
-        <Right>
+        <div className="right">
           <TranslatedButton />
           <div>
-            <Dropdown menu={{ items: [{ key: '1', label: '退出登录' }] }}>
+            <Dropdown menu={{ items, onClick: itemClick }}>
               <Avatar style={{ verticalAlign: 'middle' }} gap={2}>姚海雄</Avatar>
             </Dropdown>
           </div>
-        </Right>
-      </Layout.Header>
+        </div>
+      </Wrap>
       {/* <Tabs /> */}
     </>
   );
