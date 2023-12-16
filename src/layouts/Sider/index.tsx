@@ -13,6 +13,8 @@ const Logo = styled.div`
   line-height: 64px;
   text-align: center;
   font-size: 24px;
+  overflow: hidden;
+  text-shadow: 1px -1px #fff, -1px 1px #999, -4px 4px 2px #80808080;
 `;
 
 const Sider: React.FC = () => {
@@ -53,7 +55,7 @@ const Sider: React.FC = () => {
         borderRadius: '10px',
       }}
     >
-      <Logo>Rush Kit</Logo>
+      <Logo>{collapsed ? 'Rush' : 'Rush Kit'}</Logo>
       <Menu />
     </Layout.Sider>
   );

@@ -1,14 +1,14 @@
 import React, { Suspense, lazy } from 'react';
 import { useSelector } from 'react-redux';
 import { Routes as RouterList, Route, Navigate } from 'react-router-dom';
+import { Spin } from 'antd';
 import AuthRoute from './AuthRoute';
 // import routes from './config';
 import Layouts from '../layouts';
 import NotFound from '../pages/NotFound';
 import Login from '../pages/Login';
-import { RouteType } from '@/types/route';
-import { Spin } from 'antd';
 import { HOME_PATH, LOGIN_PATH } from './constans';
+import { RouteType } from '@/types/route';
 
 const generateRoutes = (routes: RouteType[]): any => {
   return routes.map((route: RouteType) => {
@@ -26,7 +26,9 @@ const generateRoutes = (routes: RouteType[]): any => {
                     <div className="content" />
                   </Spin>
                 }>
-                  <AuthRoute path={route.path} title={route.title}><Component /></AuthRoute>
+                  <AuthRoute path={route.path} title={route.title}>
+                    <Component />
+                  </AuthRoute>
                 </Suspense>
               }
             >

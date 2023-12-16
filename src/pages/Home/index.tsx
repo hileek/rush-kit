@@ -90,7 +90,7 @@ console.log('Home component rendered');
     <div>
       <h1>Dynamic Form Example</h1>
       <DynamicForm ref={formInstance} fields={formConfig} onFinish={handleSubmit} />
-      <QueryTable />
+      <QueryTable fields={[]} />
       <div onClick={() => console.log(formInstance.current?.getFieldsValue())}>
         测试ref
       </div>

@@ -1,5 +1,5 @@
 import React, { forwardRef, useImperativeHandle } from 'react';
-import { Button, Col, Form, FormInstance, FormProps, Row, RowProps } from 'antd';
+import { Col, Form, FormInstance, FormProps, Row, RowProps } from 'antd';
 import Components from './Components';
 
 interface DynamicFormProps extends FormProps {
@@ -21,35 +21,33 @@ const DynamicForm = forwardRef<FormInstance, DynamicFormProps>(({ fields, onFini
 
   return (
     <Form form={form} onFinish={onFinish}>
-      <Row { ...rowProps }>
-        {fields.map((field) => {
-          const { name, label, type, condition, shouldUpdate, rules = [], componentProps = {}, colProps = { span: 24 } } = field;
+      <Row {...rowProps}>
+        {fields.map(({ name, label, type, condition, shouldUpdate, rules = [], componentProps = {}, colProps = { span: 24 } }) => {
           const Component = Components[type];
 
-          if (condition) {
-            return ( 
+          return (
+            condition ? (
               <Form.Item
                 noStyle
                 key={name}
                 shouldUpdate={shouldUpdate || true}
               >
-                {({ getFieldsValue }) => 
-                  condition(getFieldsValue()) ? (
-                    <Col { ...colProps }>
+                {({ getFieldsValue }) =>
+                  condition(getFieldsValue()) && (
+                    <Col {...colProps}>
                       <Form.Item name={name} label={label} rules={rules}>
-                        <Component { ...componentProps } />
+                        <Component {...componentProps} />
                       </Form.Item>
                     </Col>
-                  ) : null}
+                  )}
               </Form.Item>
-            );
-          }
-          return (
-            <Col { ...colProps } key={name}>
-              <Form.Item name={name} label={label} rules={rules}>
-                <Component { ...componentProps } />
-              </Form.Item>
-            </Col>
+            ) : (
+              <Col {...colProps} key={name}>
+                <Form.Item name={name} label={label} rules={rules}>
+                  <Component {...componentProps} />
+                </Form.Item>
+              </Col>
+            )
           );
         })}
       </Row>
