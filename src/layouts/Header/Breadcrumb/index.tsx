@@ -10,10 +10,7 @@ import TranslatedText from '@/components/TranslatedText';
 const Breadcrumb: React.FC = () => {
   const location = useLocation();
 
-  const { routes } = useSelector((state: RouteState) => ({
-    routes: state.route.routes,
-    loading: state.route.loading,
-  }));
+  const routes = useSelector((state: RouteState) => state.route.routes);
 
   const [items, setItems] = useState<RouteType[]>([]);
 

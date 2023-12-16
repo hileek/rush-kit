@@ -19,7 +19,9 @@ declare global {
   | 'Switch'
   | 'Upload'
   | 'Cascader'
+  | 'RangePicker'
   | 'Slider'
+  | 'Button'
   | 'ColorPicker';
   interface Field {
     type: FormType;

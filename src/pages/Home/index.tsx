@@ -1,7 +1,11 @@
-import React, { useEffect } from 'react';
+import React, { useRef } from 'react';
+import { FormInstance } from 'antd';
 import DynamicForm from '@/components/DynamicForm';
+import QueryTable from '@/components/QueryTable';
 
 const Home: React.FC = () => {
+console.log('Home component rendered');
+  const formInstance = useRef<FormInstance<any>>(null);
   const handleSubmit = (values: any) => {
     console.log('Form values:', values);
   };
@@ -55,14 +59,40 @@ const Home: React.FC = () => {
       condition: (record) =>  (record?.animal > 40),
       shouldUpdate: (prevValues, curValues) => prevValues.animal !== curValues.animal,
     },
+    {
+      type: 'DatePicker',
+      label: '时间',
+      name: 'time',
+      condition: (record) =>  (record?.animal > 40),
+      shouldUpdate: (prevValues, curValues) => prevValues.animal !== curValues.animal,
+    },
+    {
+      type: 'RangePicker',
+      label: '时间区域',
+      name: 'timeRange',
+      condition: (record) =>  (record?.animal > 40),
+      shouldUpdate: (prevValues, curValues) => prevValues.animal !== curValues.animal,
+    },
+    {
+      type: 'Button',
+      label: '',
+      name: '',
+      condition: (record) =>  (record?.animal > 40 && record?.gender > 0 && record?.username === '999' && record?.city === 'N'),
+      componentProps: {
+        type: 'primary',
+        htmlType: 'submit',
+        children: '提交',
+      },
+    },
   ];
 
   return (
     <div>
       <h1>Dynamic Form Example</h1>
-      <DynamicForm  fields={formConfig} onSubmit={handleSubmit} />
-      <div>
-        <div id='a'></div>
+      <DynamicForm ref={formInstance} fields={formConfig} onFinish={handleSubmit} />
+      <QueryTable />
+      <div onClick={() => console.log(formInstance.current?.getFieldsValue())}>
+        测试ref
       </div>
     </div>
   );

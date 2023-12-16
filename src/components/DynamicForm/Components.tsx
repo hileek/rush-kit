@@ -14,6 +14,7 @@ const LazyComponents: ComponentsType = {
   Checkbox: lazy(() => import('antd/es/checkbox')),
   Radio: lazy(() => import('antd/es/radio/group')),
   DatePicker: lazy(() => import('antd/es/date-picker')),
+  RangePicker: lazy(() => import('antd/es/date-picker').then((module) => ({ default: module.default.RangePicker }))),
   InputNumber: lazy(() => import('antd/es/input-number')),
   TreeSelect: lazy(() => import('antd/es/tree-select')),
   Cascader: lazy(() => import('antd/es/cascader')),
@@ -21,6 +22,7 @@ const LazyComponents: ComponentsType = {
   Upload: lazy(() => import('antd/es/upload')),
   Slider: lazy(() => import('antd/es/slider')),
   ColorPicker: lazy(() => import('antd/es/color-picker')),
+  Button: lazy(() => import('antd/es/button')),
 };
 
 const Components: Record<FormType, ComponentGenerator> = Object.fromEntries(

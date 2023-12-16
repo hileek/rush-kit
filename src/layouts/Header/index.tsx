@@ -22,7 +22,7 @@ const Wrap = styled(Layout.Header)<WrapProps>`
   justify-content: space-between;
   padding: 0;
   background-color: ${props => props.bg};
-  margin: 10px 16px -10px;
+  margin: 10px 16px 0;
   border-radius: 10px;
 
   .right {
@@ -35,9 +35,7 @@ const Wrap = styled(Layout.Header)<WrapProps>`
 `;
 
 const Header: React.FC = () => {
-  const { collapsed } = useSelector((state: any) => ({
-    collapsed: state.app.collapsed,
-  }));
+  const collapsed = useSelector((state: any) => state.app.collapsed);
 
   const dispatch = useDispatch();
 

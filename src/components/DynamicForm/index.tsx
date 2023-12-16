@@ -1,14 +1,23 @@
-import React from 'react';
-import { Col, Form, FormProps, Row, RowProps } from 'antd';
+import React, { forwardRef, useImperativeHandle } from 'react';
+import { Button, Col, Form, FormInstance, FormProps, Row, RowProps } from 'antd';
 import Components from './Components';
+
 interface DynamicFormProps extends FormProps {
   fields: Field[];
   rowProps?: RowProps;
-  onSubmit: (values: Record<string, string>) => void;
+  onFinish?: (values: Record<string, string>) => void;
 }
 
-const DynamicForm: React.FC<DynamicFormProps> = ({ fields, onFinish, rowProps = {} }) => {
+const DynamicForm = forwardRef<FormInstance, DynamicFormProps>(({ fields, onFinish = () => undefined, rowProps = {} }, ref) => {
   const [form] = Form.useForm();
+
+  useImperativeHandle(
+    ref,
+    () => ({
+      ...form,
+    }),
+    [form]
+  );
 
   return (
     <Form form={form} onFinish={onFinish}>
@@ -46,6 +55,8 @@ const DynamicForm: React.FC<DynamicFormProps> = ({ fields, onFinish, rowProps = 
       </Row>
     </Form>
   );
-};
+});
+
+DynamicForm.displayName = 'DynamicForm';
 
 export default DynamicForm;

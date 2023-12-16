@@ -42,19 +42,19 @@ const Wrap = styled.div`
 
 const TranslatedButton: React.FC = () => {
 
-  const [current, setCurrent] = useState(storage.getLanguage());
+  const [current, setCurrent] = useState(storage.getLocale());
   const { i18n } = useTranslation();
 
-  const changeLanguage = () => {
-    const language = current === 'zh' ? 'en' : 'zh';
-    i18n.changeLanguage(language);
-    setCurrent(language);
-    storage.setLanguage(language);
+  const changeLocale = () => {
+    const locale = current === 'zh' ? 'en' : 'zh';
+    i18n.changeLanguage(locale);
+    setCurrent(locale);
+    storage.setLocale(locale);
   };
 
   return (
     <Tooltip title={current === 'zh' ? '中文 / English' : 'English / 中文'}>
-      <Wrap onClick={changeLanguage}>
+      <Wrap onClick={changeLocale}>
         <div className="inner">
           <span className={current === 'zh' ? 'select' : ''}>中</span>
           <span className={current === 'en' ?'select' : ''}>En</span>

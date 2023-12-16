@@ -39,10 +39,8 @@ const generateRoutes = (routes: RouteType[]): any => {
 };
 
 const Routes = () => {
-  const { routes } = useSelector((state: any) => ({
-    routes: state.route.routes,
-    loading: state.route.loading,
-  }));
+  const routes = useSelector((state: any) => state.route.routes);
+
   return (
     <RouterList>
       <Route path="/" element={<AuthRoute path="/" title="首页"><Layouts /></AuthRoute>}>

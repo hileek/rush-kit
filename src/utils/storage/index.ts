@@ -35,8 +35,8 @@ const getTabs = () => getItem(TABS_NAME, []);
 const setTabs = (value: Option[]) => setItem(TABS_NAME, value);
 const removeTabs = () => removeItem(TABS_NAME);
 
-const getLanguage = (): Language => getItem(LANGUAGE_NAME, 'zh');
-const setLanguage = (value: Language) => setItem(LANGUAGE_NAME, value);
+const getLocale = (): Language => getItem(LANGUAGE_NAME, 'zh');
+const setLocale = (value: Language) => setItem(LANGUAGE_NAME, value);
 const removeLanguage = () => removeItem(LANGUAGE_NAME);
 
 const clear = () => {
@@ -54,7 +54,7 @@ export default {
   getTabs,
   setTabs,
   removeTabs,
-  getLanguage,
-  setLanguage,
+  getLocale,
+  setLocale,
   removeLanguage,
 };

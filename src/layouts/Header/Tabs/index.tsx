@@ -14,9 +14,7 @@ const Tabs: React.FC = () => {
   const [items, setItems] = useState(defaultPanes);
   const newTabIndex = useRef(0);
 
-  const { tabs } = useSelector((state: any) => ({
-    tabs: state.app.tabs,
-  }));
+  const tabs = useSelector((state: any) => state.app.tabs);
 
   const onChange = (key: string) => {
     setActiveKey(key);

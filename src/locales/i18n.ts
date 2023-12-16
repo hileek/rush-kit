@@ -24,7 +24,7 @@ const resources:Record<string, Translation> = {
 
 i18n.use(initReactI18next).init({
   resources,
-  lng: storage.getLanguage(), // zh/en
+  lng: storage.getLocale(), // zh/en
   keySeparator: false, // 使用点语法 ("common.home" 代替 "common: { home: ... }")
   interpolation: {
     escapeValue: false, // 不对字符串进行 HTML 转义

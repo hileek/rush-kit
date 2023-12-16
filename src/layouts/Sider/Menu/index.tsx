@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { memo } from 'react';
 import { useNavigate, useLocation } from 'react-router-dom';
 import * as Icon from '@ant-design/icons';
 import { Menu as AntMenu, MenuProps } from 'antd';
@@ -8,7 +8,6 @@ import { AntdIconProps } from '@ant-design/icons/lib/components/AntdIcon';
 import { RouteType, RouteState } from '@/types/route';
 import { useDispatch, useSelector } from 'react-redux';
 import { addTab } from '@/redux/actions/appActions';
-
 type MenuItem = Required<MenuProps>['items'][number];
 
 const Menu: React.FC = () => {
@@ -17,10 +16,7 @@ const Menu: React.FC = () => {
   const dispatch = useDispatch();
   const current = location.pathname;
 
-  const { routes } = useSelector((state: RouteState) => ({
-    routes: state.route.routes,
-    loading: state.route.loading,
-  }));
+  const routes = useSelector((state: RouteState) => state.route.routes);
 
   const externalLinkMap: Record<string, boolean> = {};
   const generateItems = (routes: RouteType[]): MenuItem[] => {
@@ -67,4 +63,4 @@ const Menu: React.FC = () => {
   );
 };
 
-export default Menu;
+export default memo(Menu);

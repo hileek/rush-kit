@@ -19,9 +19,7 @@ const Sider: React.FC = () => {
   const dispatch = useDispatch();
   const screenType =useScreenType();
 
-  const { collapsed } = useSelector((state: any) => ({
-    collapsed: state.app.collapsed,
-  }));
+  const collapsed = useSelector((state: any) => state.app.collapsed);
 
   const collapsedWidthMap: Record<string, 0 | 80> = {
     small: 0,
@@ -51,6 +49,8 @@ const Sider: React.FC = () => {
       theme="light"
       style={{
         overflow: 'auto',
+        margin: '10px',
+        borderRadius: '10px',
       }}
     >
       <Logo>Rush Kit</Logo>
