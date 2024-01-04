@@ -1,5 +1,6 @@
 import React, { forwardRef, useImperativeHandle } from 'react';
 import { Col, Form, FormInstance, FormProps, Row, RowProps } from 'antd';
+import TranslatedText from '../TranslatedText';
 import Components from './Components';
 
 interface DynamicFormProps extends FormProps {
@@ -35,7 +36,7 @@ const DynamicForm = forwardRef<FormInstance, DynamicFormProps>(({ fields, onFini
                 {({ getFieldsValue }) =>
                   condition(getFieldsValue()) && (
                     <Col {...colProps}>
-                      <Form.Item name={name} label={label} rules={rules}>
+                      <Form.Item name={name} label={<TranslatedText>{label}</TranslatedText>} rules={rules}>
                         <Component {...componentProps} />
                       </Form.Item>
                     </Col>
@@ -43,7 +44,7 @@ const DynamicForm = forwardRef<FormInstance, DynamicFormProps>(({ fields, onFini
               </Form.Item>
             ) : (
               <Col {...colProps} key={name}>
-                <Form.Item name={name} label={label} rules={rules}>
+                <Form.Item name={name} label={<TranslatedText>{label}</TranslatedText>} rules={rules}>
                   <Component {...componentProps} />
                 </Form.Item>
               </Col>

@@ -3,9 +3,8 @@ import { ApiResponse } from '@/types/response';
 import { RouteType } from '@/types/route';
 
 const getRoutes = async () => {
-  const { code, data, message }: ApiResponse<RouteType[]> = await api.get('/getRoutes');
-  if (code !== 200) throw new Error(message || '获取菜单失败');
-  return data || [];
+  const data: RouteType[] = await api.get('/getRoutes');
+  return data;
 };
 
 const authService = {

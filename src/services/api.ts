@@ -1,4 +1,5 @@
 import axios from 'axios';
+import { message } from 'antd';
 import storage from '@/utils/storage';
 
 const api = axios.create({
@@ -24,15 +25,22 @@ api.interceptors.request.use(
 // 响应拦截器
 api.interceptors.response.use(
   (response) => {
-    console.log(response, 'response');
-    const { code, message, data } = response.data;
-    if (code === 401 ) {
-      // 调用登出接口，清除store
+    const { code, message: msg, data } = response.data;
+    console.log(code, msg, data);
+    if (code === 200) {
+      msg && message.success(msg);
+      return data;
+    }
+    // 未授权
+    if (code === 401) {
       storage.clear();
     }
-    return response.data;
+    message.error(msg);
+
+    return Promise.reject(message);
   },
   (error) => {
+    console.log(error);
     return Promise.reject(error);
   }
 );

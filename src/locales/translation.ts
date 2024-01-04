@@ -13,6 +13,7 @@ const translation: Record<string, string> = {
   '定时任务': 'ScheduledTasks',
   '任务日志': 'MissionLog',
   '权限管理': 'System Permissions',
+  '时间': 'time',
 };
 
 export default translation;
