@@ -1,19 +1,11 @@
 import React, { useRef, useEffect, useState, useImperativeHandle, forwardRef } from 'react';
 import { FormInstance, TablePaginationConfig } from 'antd';
-import { Table, TableProps } from 'antd';
+import { Table } from 'antd';
 import DynamicForm from '@/components/DynamicForm';
+import { QueryTableProps, QueryTableRef } from './types';
 
-interface QueryTableProps<RecordType, DataType = any> extends TableProps<RecordType> {
-  fields: Field[];
-  initData?: DataType[];
-  fetchData?: (params: any) => Promise<{ data: DataType[]; pageInfo: PageInfo }>;
-}
-
-const QueryTable = <RecordType extends object>(
-  { fields, fetchData, initData = [], ...tableProps }: QueryTableProps<RecordType>,
-  ref: React.Ref<unknown> | undefined
-) => {
-  const formInstance = useRef<FormInstance<any>>(null);
+const QueryTable = forwardRef<QueryTableRef, QueryTableProps<any>>(({ fields, fetchData, initData = [], ...tableProps }, ref) => {
+  const formInstance = useRef<FormInstance>(null as unknown as FormInstance);
 
   // 表格数据
   const [dataSource, setDataSource] = useState(initData);
@@ -28,7 +20,7 @@ const QueryTable = <RecordType extends object>(
     const prevPageSize = pagination.pageSize;
     setPagination((prevPagination) => ({ ...prevPagination, current, pageSize }));
     try {
-      handleSearch();
+      onSearch();
     } catch (error) {
       setPagination((prevPagination) => ({ ...prevPagination, current: prevCurrent, pageSize: prevPageSize }));
     }
@@ -40,7 +32,7 @@ const QueryTable = <RecordType extends object>(
     (tableProps.pagination ? { ...tableProps.pagination, onChange: handlePaginationChange } : {})
   );
 
-  const handleSearch = async () => {
+  const onSearch = async () => {
     if (!fetchData) return;
     try {
       setLoading(true);
@@ -69,20 +61,24 @@ const QueryTable = <RecordType extends object>(
       ...formInstance.current,
       loading,
       dataSource,
+      onSearch,
     }),
     [dataSource, loading]
   );
 
   useEffect(() => {
-    handleSearch();
+    onSearch();
   }, []);
 
   return (
     <div>
-      <DynamicForm fields={fields} ref={formInstance} onFinish={() => handleSearch()} />
+      <DynamicForm fields={fields} ref={formInstance} onFinish={() => onSearch()} />
       <Table {...tableProps} dataSource={dataSource} pagination={pagination} loading={loading} />
     </div>
   );
-};
+});
+
+QueryTable.displayName = 'QueryTable';
+
 
 export default QueryTable;

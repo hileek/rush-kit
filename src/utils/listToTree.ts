@@ -1,9 +1,3 @@
-interface TreeNode {
-  key: string | number;
-  [key: string]: any; // 其他属性
-  children?: TreeNode[];
-}
-
 /**
  * 将扁平的数组转换成树形结构
  * @param data 目标元素

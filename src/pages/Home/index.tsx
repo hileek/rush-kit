@@ -2,10 +2,13 @@ import React, { useRef } from 'react';
 import { FormInstance } from 'antd';
 import DynamicForm from '@/components/DynamicForm';
 import QueryTable from '@/components/QueryTable';
+import { QueryTableRef } from '@/components/QueryTable/types';
 
 const Home: React.FC = () => {
 console.log('Home component rendered');
   const formInstance = useRef<FormInstance<any>>(null);
+  const tableInstance = useRef<QueryTableRef<any>>(null);
+
   const handleSubmit = (values: any) => {
     console.log('Form values:', values);
   };
@@ -104,11 +107,11 @@ console.log('Home component rendered');
     <div>
       <h1>Dynamic Form Example</h1>
       <DynamicForm ref={formInstance} fields={formConfig} onFinish={handleSubmit} />
-      <QueryTable fields={formConfig} dataSource={[]} fetchData={function (params: any): Promise<any> {
+      <QueryTable fields={formConfig} ref={tableInstance} dataSource={[]} fetchData={function (params: any): Promise<any> {
         console.log(params);
         return params;
       } } />
-      <div onClick={() => console.log(formInstance.current?.getFieldsValue())}>
+      <div onClick={() => console.log(formInstance.current?.getFieldsValue(), tableInstance?.current)}>
         测试ref
       </div>
     </div>

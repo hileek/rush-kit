@@ -1,5 +1,4 @@
 import api from '../api';
-import { ApiResponse } from '@/types/response';
 import { RouteType } from '@/types/route';
 
 const getRoutes = async () => {

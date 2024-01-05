@@ -12,6 +12,10 @@ declare global {
     current: number;
     pageSize: number;
   }
+  interface TreeNode {
+    [key: string]: any;
+    children?: TreeNode[];
+  }
 }
 
 export {};
