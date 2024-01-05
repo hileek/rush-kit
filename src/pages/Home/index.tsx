@@ -75,13 +75,27 @@ console.log('Home component rendered');
     },
     {
       type: 'Button',
-      label: '',
       name: '',
       condition: (record) =>  (record?.animal > 40 && record?.gender > 0 && record?.username === '999' && record?.city === 'N'),
       componentProps: {
         type: 'primary',
         htmlType: 'submit',
         children: '提交',
+      },
+      colProps: {
+        span: 22,
+      },
+    },
+    {
+      type: 'Button',
+      name: 'a',
+      condition: (record) =>  (record?.animal > 40 && record?.gender > 0 && record?.username === '999' && record?.city === 'N'),
+      componentProps: {
+        type: 'primary',
+        children: '提交',
+      },
+      colProps: {
+        span: 2,
       },
     },
   ];
@@ -90,7 +104,10 @@ console.log('Home component rendered');
     <div>
       <h1>Dynamic Form Example</h1>
       <DynamicForm ref={formInstance} fields={formConfig} onFinish={handleSubmit} />
-      {/* <QueryTable fields={[]} /> */}
+      <QueryTable fields={formConfig} dataSource={[]} fetchData={function (params: any): Promise<any> {
+        console.log(params);
+        return params;
+      } } />
       <div onClick={() => console.log(formInstance.current?.getFieldsValue())}>
         测试ref
       </div>

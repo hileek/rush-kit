@@ -8,6 +8,10 @@ declare global {
     key: string;
     label: string;
   }
+  interface PageInfo {
+    current: number;
+    pageSize: number;
+  }
 }
 
 export {};

@@ -1,16 +1,17 @@
-import React, { useRef, useEffect, useState, useCallback } from 'react';
+import React, { useRef, useEffect, useState, useImperativeHandle, forwardRef } from 'react';
 import { FormInstance, TablePaginationConfig } from 'antd';
 import { Table, TableProps } from 'antd';
 import DynamicForm from '@/components/DynamicForm';
 
-interface QueryTableProps<RecordType> extends TableProps<RecordType> {
+interface QueryTableProps<RecordType, DataType = any> extends TableProps<RecordType> {
   fields: Field[];
-  initData?: any[];
-  fetchData: (params: any) => Promise<any>;
+  initData?: DataType[];
+  fetchData?: (params: any) => Promise<{ data: DataType[]; pageInfo: PageInfo }>;
 }
 
 const QueryTable = <RecordType extends object>(
-  { fields, fetchData, initData = [], ...tableProps }: QueryTableProps<RecordType>
+  { fields, fetchData, initData = [], ...tableProps }: QueryTableProps<RecordType>,
+  ref: React.Ref<unknown> | undefined
 ) => {
   const formInstance = useRef<FormInstance<any>>(null);
 
@@ -39,7 +40,8 @@ const QueryTable = <RecordType extends object>(
     (tableProps.pagination ? { ...tableProps.pagination, onChange: handlePaginationChange } : {})
   );
 
-  const handleSearch = useCallback(async () => {
+  const handleSearch = async () => {
+    if (!fetchData) return;
     try {
       setLoading(true);
       const formData = formInstance.current?.getFieldsValue();
@@ -54,15 +56,26 @@ const QueryTable = <RecordType extends object>(
       setPagination((prevPagination) => ({ ...prevPagination, ...pageInfo }));
       setDataSource(data);
     } catch (error) {
+      // 为了让handlePaginationChange函数捕获错误
       Promise.reject(error);
     } finally {
       setLoading(false);
     }
-  }, [fetchData, pagination]);
+  };
+
+  useImperativeHandle(
+    ref,
+    () => ({
+      ...formInstance.current,
+      loading,
+      dataSource,
+    }),
+    [dataSource, loading]
+  );
 
   useEffect(() => {
     handleSearch();
-  }, [handleSearch]);
+  }, []);
 
   return (
     <div>

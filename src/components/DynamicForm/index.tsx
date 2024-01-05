@@ -36,7 +36,7 @@ const DynamicForm = forwardRef<FormInstance, DynamicFormProps>(({ fields, onFini
                 {({ getFieldsValue }) =>
                   condition(getFieldsValue()) && (
                     <Col {...colProps}>
-                      <Form.Item name={name} label={<TranslatedText>{label}</TranslatedText>} rules={rules}>
+                      <Form.Item name={name} label={label ? <TranslatedText>{label}</TranslatedText> : null} rules={rules}>
                         <Component {...componentProps} />
                       </Form.Item>
                     </Col>
@@ -44,7 +44,7 @@ const DynamicForm = forwardRef<FormInstance, DynamicFormProps>(({ fields, onFini
               </Form.Item>
             ) : (
               <Col {...colProps} key={name}>
-                <Form.Item name={name} label={<TranslatedText>{label}</TranslatedText>} rules={rules}>
+                <Form.Item name={name} label={label ? <TranslatedText>{label}</TranslatedText> : null} rules={rules}>
                   <Component {...componentProps} />
                 </Form.Item>
               </Col>

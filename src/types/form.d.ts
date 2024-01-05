@@ -25,7 +25,7 @@ declare global {
   | 'ColorPicker';
   interface Field {
     type: FormType;
-    label: string;
+    label?: string;
     name: string;
     condition?: (values: any) => boolean;
     options?: Option[];
