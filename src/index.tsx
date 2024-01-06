@@ -9,6 +9,7 @@ import reportWebVitals from './reportWebVitals';
 import { BrowserRouter } from 'react-router-dom';
 import store from './redux/store';
 import i18n from '@/locales/i18n';
+import 'nprogress/nprogress.css';
 
 const root = ReactDOM.createRoot(
   document.getElementById('root') as HTMLElement

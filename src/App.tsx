@@ -32,7 +32,7 @@ const App = () => {
 
   return (
     // <ConfigProvider locale={locale}>
-      <Routes />
+    <Routes />
     // </ConfigProvider>
   );
 };

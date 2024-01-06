@@ -65,7 +65,6 @@ const Breadcrumb: React.FC = () => {
 
   const itemRender = (item: BreadcrumbItem, _: unknown, items: BreadcrumbItem[], paths: string[]) => {
     const last = items.indexOf(item) === items.length - 1;
-    console.log(paths,paths[paths.length - 1]);
     return last ? <span>{item.title}</span> : <Link to={paths[paths.length - 1]}>{item.title}</Link>;
   };
 

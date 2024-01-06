@@ -1,4 +1,5 @@
-import React from 'react';
+import React, { useTransition, useLayoutEffect } from 'react';
+import nprogress from 'nprogress';
 import { useNavigate } from 'react-router';
 import { Form, Input, Button, Checkbox } from 'antd';
 import { useDispatch } from 'react-redux';
@@ -40,14 +41,25 @@ const Wrapper = styled.div`
 const Login: React.FC = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
+  const [isPending, startTransition] = useTransition();
 
   const onFinish = (values: any) => {
-    console.log('Received values:', values);
-    // 在这里处理登录逻辑
-    storage.setToken('123123');
-    dispatch(fetchRoutes() as any);
-    navigate('/', { replace: true });
+    startTransition(() => {
+      console.log('Received values:', values);
+      // 在这里处理登录逻辑
+      storage.setToken('123123');
+      dispatch(fetchRoutes() as any);
+      navigate('/', { replace: true });
+    });
   };
+
+  useLayoutEffect(() => {
+    if (isPending) {
+      nprogress.start();
+    } else {
+      nprogress.done();
+    }
+  }, [isPending]);
 
   return (
     <Wrapper>

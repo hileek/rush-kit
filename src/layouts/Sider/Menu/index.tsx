@@ -1,13 +1,14 @@
-import React, { memo } from 'react';
+import React, { memo, useMemo } from 'react';
 import { useNavigate, useLocation } from 'react-router-dom';
 import * as Icon from '@ant-design/icons';
 import { Menu as AntMenu, MenuProps } from 'antd';
-import TranslatedText from '@/components/TranslatedText';
 
+import TranslatedText from '@/components/TranslatedText';
 import { AntdIconProps } from '@ant-design/icons/lib/components/AntdIcon';
 import { RouteType, RouteState } from '@/types/route';
 import { useDispatch, useSelector } from 'react-redux';
 import { addTab } from '@/redux/actions/appActions';
+import Link from '@/components/Link';
 type MenuItem = Required<MenuProps>['items'][number];
 
 const Menu: React.FC = () => {
@@ -21,7 +22,7 @@ const Menu: React.FC = () => {
   const externalLinkMap: Record<string, boolean> = {};
   const generateItems = (routes: RouteType[]): MenuItem[] => {
     const items: MenuItem[] = [];
-
+    console.log('gggg');
     for (const item of routes) {
       const { icon, children, isExternalLink, isMenu, path, type } = item;
       let label = item.title;
@@ -31,21 +32,21 @@ const Menu: React.FC = () => {
 
       if (isExternalLink) {
         externalLinkMap[path] = true;
-        label = <a href={path} target="_blank" rel="noopener noreferrer"><TranslatedText>{label}</TranslatedText></a> as unknown as string;
+        label = <Link to={path} target="_blank" rel="noopener noreferrer"><TranslatedText>{label}</TranslatedText></Link> as unknown as string;
       }
 
       items.push({
         key: path,
         icon: IconComponent && <IconComponent />,
         children: children?.length ? generateItems(children) : undefined,
-        label: typeof label === 'string' ? <TranslatedText>{label}</TranslatedText> : label,
+        label: typeof label === 'string' ? <Link to={path}><TranslatedText>{label}</TranslatedText></Link> : label,
         type,
       });
     }
     return items;
   };
 
-  const items = generateItems(routes);
+  const items = useMemo(() => generateItems(routes), [routes]);
 
   const onClick: MenuProps['onClick'] = (e) => {
     if (externalLinkMap[e.key] || e.key === current) return;
@@ -58,7 +59,7 @@ const Menu: React.FC = () => {
       mode="inline"
       selectedKeys={[current]}
       items={items}
-      onClick={onClick}
+      // onClick={onClick}
     />
   );
 };
