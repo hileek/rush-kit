@@ -14,7 +14,7 @@ export interface LinkProps {
 }
 
 const Link = forwardRef<HTMLAnchorElement, LinkProps>((props, ref) => {
-  const { to, children, ...rest } = props;
+  const { to, children, onClick, ...rest } = props;
   const [isPending, startTransition] = useTransition();
   const navigate = useNavigate();
   const { pathname } = useLocation();
@@ -27,7 +27,8 @@ const Link = forwardRef<HTMLAnchorElement, LinkProps>((props, ref) => {
   }, [to]);
 
   const handleClick = (e: MouseEvent<HTMLAnchorElement>) => {
-    props.onClick?.(e);
+    onClick?.(e);
+
     if (!href?.startsWith('http')) {
       if (!e.metaKey && !e.ctrlKey && !e.shiftKey) {
         e.preventDefault();

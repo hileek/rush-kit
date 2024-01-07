@@ -11,32 +11,30 @@ import { HOME_PATH, LOGIN_PATH } from './constans';
 import { RouteType } from '@/types/route';
 
 const generateRoutes = (routes: RouteType[]): any => {
-  return routes.map((route: RouteType) => {
-    const Component = route.component ? lazy(() => import(`@/${route.component}`)) : null;
-      return (
-        <React.Fragment key={route.id}>
-          {!!route.redirect && <Route path={route.path} element={<Navigate to={route.redirect} replace />} />}
-          {!Component ? generateRoutes(route.children) : (
-            <Route
-              path={route.path}
-              key={route.key}
-              element={
-                <Suspense fallback={
-                  <Spin tip="Loading">
-                    <div className="content" />
-                  </Spin>
-                }>
-                  <AuthRoute path={route.path} title={route.title}>
-                    <Component />
-                  </AuthRoute>
-                </Suspense>
-              }
-            >
-              {route.children && !!route.children.length && generateRoutes(route.children)}
-            </Route>
-          )}
-        </React.Fragment>
-      );
+  return routes && routes.map((route: RouteType) => {
+    const { children, redirect, path } = route;
+    const Component = route.component ? lazy(() => import(`@/${route.component}`)) : undefined;
+
+    return (
+      <React.Fragment key={route.id}>
+        {!!redirect && <Route path={path} element={<Navigate to={redirect} replace />} />}
+        {!Component ? generateRoutes(children) : (
+          <Route
+            path={path}
+            element={
+              <Suspense fallback={null}>
+                <AuthRoute path={path} title={route.title}>
+                  <Component />
+                </AuthRoute>
+              </Suspense>
+            }
+          >
+            {/* 有Component并且有children，就得在组件中使用Outlet（嵌套路由） */}
+            {generateRoutes(children)}
+          </Route>
+        )}
+      </React.Fragment>
+    );
   });
 };
 

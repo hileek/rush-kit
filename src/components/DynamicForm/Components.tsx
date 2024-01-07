@@ -1,5 +1,25 @@
 import React, { lazy, Suspense, createElement, ComponentType, ReactElement } from 'react';
 
+export type FormType =
+| 'Input'
+| 'Group'
+| 'TextArea'
+| 'Search'
+| 'Password'
+| 'Select'
+| 'Checkbox'
+| 'Radio'
+| 'DatePicker'
+| 'InputNumber'
+| 'TreeSelect'
+| 'Switch'
+| 'Upload'
+| 'Cascader'
+| 'RangePicker'
+| 'Slider'
+| 'Button'
+| 'ColorPicker';
+
 type ComponentsType = Record<FormType, React.LazyExoticComponent<ComponentType<any>>>;
 
 type ComponentGenerator = (props: any) => ReactElement;

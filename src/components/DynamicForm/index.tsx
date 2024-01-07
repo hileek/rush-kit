@@ -1,7 +1,21 @@
 import React, { forwardRef, useImperativeHandle } from 'react';
-import { Col, Form, FormInstance, FormProps, Row, RowProps } from 'antd';
+import { Col, ColProps, Form, FormInstance, FormProps, FormRule, Row, RowProps } from 'antd';
 import TranslatedText from '../TranslatedText';
-import Components from './Components';
+import Components, { FormType } from './Components';
+
+export interface Field {
+  type: FormType;
+  label?: string;
+  name: string;
+  condition?: (values: any) => boolean;
+  options?: Option[];
+  shouldUpdate?: (prevValues: any, curValues: any) => boolean;
+  rules?: FormRule[];
+  componentProps?: Record<any, any>;
+  colProps?: ColProps;
+}
+
+export type { FormType };
 
 interface DynamicFormProps extends FormProps {
   fields: Field[];

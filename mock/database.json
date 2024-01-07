@@ -25,8 +25,8 @@
             "component": "pages/Permissions/User",
             "isMenu": true,
             "permissions": ["view_dashboard"],
-            "isExternalLink": false,
-            "children":[]
+            "type": "group",
+            "isExternalLink": false
           },
           {
             "id": 3,
@@ -52,8 +52,7 @@
             "component": "pages/Permissions/Menu",
             "isMenu": true,
             "permissions": ["view_dashboard"],
-            "isExternalLink": false,
-            "children":[]
+            "isExternalLink": false
           }
         ]
       },
@@ -66,8 +65,7 @@
         "path": "/database",
         "component": "pages/Database",
         "isMenu": true,
-        "isExternalLink": false,
-        "children": []
+        "isExternalLink": false
       },
       {
         "id": 7,
@@ -78,8 +76,7 @@
         "path": "/interface",
         "component": "pages/Interface",
         "isMenu": true,
-        "isExternalLink": false,
-        "children": []
+        "isExternalLink": false
       },
       {
         "id": 8,
@@ -103,8 +100,7 @@
             "component": "pages/Task/Timer",
             "isMenu": true,
             "permissions": ["view_dashboard"],
-            "isExternalLink": false,
-            "children":[]
+            "isExternalLink": false
           },
           {
             "id": 10,
@@ -116,8 +112,7 @@
             "component": "pages/Task/Log",
             "isMenu": true,
             "permissions": ["view_dashboard"],
-            "isExternalLink": false,
-            "children":[]
+            "isExternalLink": false
           }
         ]
       },
@@ -131,8 +126,7 @@
         "component": null,
         "isMenu": true,
         "permissions": ["view_dashboard"],
-        "isExternalLink": true,
-        "children":[]
+        "isExternalLink": true
       }
     ]
   },

@@ -1,8 +1,8 @@
 import React, { useRef } from 'react';
 import { FormInstance } from 'antd';
-import DynamicForm from '@/components/DynamicForm';
+import DynamicForm, { Field } from '@/components/DynamicForm';
 import QueryTable from '@/components/QueryTable';
-import { QueryTableRef } from '@/components/QueryTable/types';
+import type { QueryTableRef } from '@/components/QueryTable';
 
 const Home: React.FC = () => {
 console.log('Home component rendered');

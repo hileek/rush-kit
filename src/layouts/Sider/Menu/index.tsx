@@ -18,29 +18,30 @@ const Menu: React.FC = () => {
   const current = location.pathname;
 
   const routes = useSelector((state: RouteState) => state.route.routes);
+  const handleClick = (key: string, label: string) => {
+    dispatch(addTab({ key, label }));
+  };
 
-  const externalLinkMap: Record<string, boolean> = {};
   const generateItems = (routes: RouteType[]): MenuItem[] => {
     const items: MenuItem[] = [];
-    console.log('gggg');
+
     for (const item of routes) {
-      const { icon, children, isExternalLink, isMenu, path, type } = item;
-      let label = item.title;
+      const { icon, children, isExternalLink, isMenu, path, type, title } = item;
       if (!isMenu) continue;
-
+      const TranslatedLabel = () => <TranslatedText>{title}</TranslatedText>;
+      const label = children?.length || type ? <TranslatedLabel /> : (
+        isExternalLink
+          ? <Link to={path} target="_blank" rel="noopener noreferrer"><TranslatedLabel /></Link>
+          : <Link to={path}><TranslatedLabel /></Link>
+      );
       const IconComponent = (Icon as unknown as { [key: string]: React.ComponentType<AntdIconProps> })[icon] || null;
-
-      if (isExternalLink) {
-        externalLinkMap[path] = true;
-        label = <Link to={path} target="_blank" rel="noopener noreferrer"><TranslatedText>{label}</TranslatedText></Link> as unknown as string;
-      }
 
       items.push({
         key: path,
+        type,
         icon: IconComponent && <IconComponent />,
         children: children?.length ? generateItems(children) : undefined,
-        label: typeof label === 'string' ? <Link to={path}><TranslatedText>{label}</TranslatedText></Link> : label,
-        type,
+        label,
       });
     }
     return items;
@@ -48,12 +49,6 @@ const Menu: React.FC = () => {
 
   const items = useMemo(() => generateItems(routes), [routes]);
 
-  const onClick: MenuProps['onClick'] = (e) => {
-    if (externalLinkMap[e.key] || e.key === current) return;
-    navigate(e.key);
-    dispatch(addTab({ key: e.key, label: '迭代' }));
-  };
-  
   return (
     <AntMenu
       mode="inline"

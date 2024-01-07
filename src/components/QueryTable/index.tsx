@@ -1,8 +1,21 @@
 import React, { useRef, useEffect, useState, useImperativeHandle, forwardRef } from 'react';
-import { FormInstance, TablePaginationConfig } from 'antd';
+import { FormInstance, TablePaginationConfig, TableProps } from 'antd';
 import { Table } from 'antd';
-import DynamicForm from '@/components/DynamicForm';
-import { QueryTableProps, QueryTableRef } from './types';
+import DynamicForm, { Field } from '@/components/DynamicForm';
+
+export interface QueryTableProps<RecordType, DataType = any> extends TableProps<RecordType> {
+  fields: Field[];
+  initData?: DataType[];
+  fetchData?: (params: any) => Promise<{ data: DataType[]; pageInfo: PageInfo }>;
+}
+
+export interface QueryTableRef<DataSource = any> extends FormInstance {
+  loading: boolean;
+  dataSource: DataSource[];
+  onSearch: () => void;
+}
+
+export type { Field };
 
 const QueryTable = forwardRef<QueryTableRef, QueryTableProps<any>>(({ fields, fetchData, initData = [], ...tableProps }, ref) => {
   const formInstance = useRef<FormInstance>(null as unknown as FormInstance);

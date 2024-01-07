@@ -49,7 +49,7 @@ const Sider: React.FC = () => {
     '': 80,
   };
 
-  const siderClick = (e: React.MouseEvent<HTMLElement>) => {
+  const handleClick = (e: React.MouseEvent<HTMLElement>) => {
     const targetElement = e.target as HTMLElement;
     if (targetElement.tagName !== 'ASIDE') return;
 
@@ -75,7 +75,7 @@ const Sider: React.FC = () => {
       collapsed={collapsed}
       trigger={null}
       theme="light"
-      onClick={siderClick}
+      onClick={handleClick}
     >
       <Logo>{collapsed ? 'Rush' : 'Rush Kit'}</Logo>
       <Menu />
