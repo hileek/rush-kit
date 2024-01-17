@@ -41,6 +41,7 @@ const removeLanguage = () => removeItem(LANGUAGE_NAME);
 
 const clear = () => {
   localStorage.clear();
+  removeToken();
 };
 
 export const isAuth = () => !!getToken();

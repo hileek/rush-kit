@@ -1,11 +1,10 @@
-import React, { useRef } from 'react';
+import React, { useEffect, useRef } from 'react';
 import { FormInstance } from 'antd';
 import DynamicForm, { Field } from '@/components/DynamicForm';
 import QueryTable from '@/components/QueryTable';
 import type { QueryTableRef } from '@/components/QueryTable';
 
 const Home: React.FC = () => {
-console.log('Home component rendered');
   const formInstance = useRef<FormInstance<any>>(null);
   const tableInstance = useRef<QueryTableRef<any>>(null);
 
@@ -102,6 +101,10 @@ console.log('Home component rendered');
       },
     },
   ];
+
+  useEffect(() => {
+    console.log('home effect');
+  }, []);
 
   return (
     <div>

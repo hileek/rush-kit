@@ -18,8 +18,28 @@ module.exports = {
     node: true,
   },
   rules: {
-    'max-len': ['error', { 'code': 140, 'ignoreUrls': true, 'ignoreStrings': true, 'ignoreTemplateLiterals': true }],
-    'quotes': ['error', 'single'],
+    'react/jsx-tag-spacing': ['error', {
+      closingSlash: 'never',
+      beforeSelfClosing: 'always',
+      afterOpening: 'never',
+      beforeClosing: 'never',
+    }],
+    'react/self-closing-comp': ['error', {
+      component: true,
+      html: true,
+    }],
+    'react/jsx-props-no-multi-spaces': ['error'],
+    'jsx-quotes': ['error', 'prefer-double'],
+    'max-len': [
+      'error',
+      {
+        code: 140,
+        ignoreUrls: true,
+        ignoreStrings: true,
+        ignoreTemplateLiterals: true,
+      },
+    ],
+    quotes: ['error', 'single'],
     'comma-dangle': [
       'error',
       {
@@ -27,10 +47,14 @@ module.exports = {
         objects: 'always-multiline',
         imports: 'always-multiline',
         exports: 'always-multiline',
-        functions: 'never',
+        functions: 'always-multiline',
       },
     ],
-    'semi': ['error', 'always'],
+    'comma-spacing': ['error', { before: false, after: true }],
+    semi: ['error', 'always'],
     'eol-last': ['error', 'always'],
+    'object-curly-spacing': ['error', 'always'],
+    'quote-props': ['error', 'as-needed', { keywords: false, unnecessary: true, numbers: false }],
+    'array-bracket-spacing': ['error', 'never'],
   },
 };

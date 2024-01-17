@@ -1,12 +1,14 @@
+import React, { ReactNode } from 'react';
+
 declare global {
   interface Option {
     label: string;
-    value: string;
+    value: ReactNode;
   }
 
   interface Item {
     key: string;
-    label: string;
+    label: ReactNode;
   }
   interface PageInfo {
     current: number;

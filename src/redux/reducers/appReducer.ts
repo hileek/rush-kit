@@ -2,7 +2,7 @@ import { PayloadAction } from '@reduxjs/toolkit';
 import { SET_TABS, ADD_TAB, SET_COLLAPSED, SET_SCREEN_TYPE } from '@/redux/constants/type';
 import storage from '@/utils/storage';
 import getScreenType from '@/utils/getScreenType';
-import type { Option, ScreenType, Action} from '@/types/app';
+import type { Option, ScreenType, Action } from '@/types/app';
 
 interface Init {
   tabs: Option[];

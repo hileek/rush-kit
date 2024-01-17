@@ -9,8 +9,11 @@ import {
 
 import { setCollapsed } from '@/redux/actions/appActions';
 import Breadcrumb from './Breadcrumb';
-import Tabs from './Tabs';
 import TranslatedButton from './TranslatedButton';
+import TranslatedText from '@/components/TranslatedText';
+import storage from '@/utils/storage';
+import { useNavigate } from 'react-router-dom';
+import { LOGIN_PATH } from '@/routes/constans';
 
 interface WrapProps {
   bg?: string;
@@ -36,7 +39,7 @@ const Wrap = styled(Layout.Header)<WrapProps>`
 
 const Header: React.FC = () => {
   const collapsed = useSelector((state: any) => state.app.collapsed);
-
+  const navigate = useNavigate();
   const dispatch = useDispatch();
 
   const {
@@ -44,14 +47,19 @@ const Header: React.FC = () => {
   } = theme.useToken();
 
   type Key = 'logout';
+  interface ItemType extends Item {
+    key: Key,
+  }
 
   const map: Record<Key, () => void> = {
     logout: () => {
       console.log('logout');
+      storage.clear();
+      navigate(LOGIN_PATH);
     },
   };
 
-  const items: Item[] = [{ key: 'logout', label: '退出登录' }];
+  const items: ItemType[] = [{ key: 'logout', label: <TranslatedText>退出登录</TranslatedText> }];
   
   const itemClick: MenuProps['onClick'] = ({ key }) => {
     map[key as Key]();
@@ -82,7 +90,6 @@ const Header: React.FC = () => {
           </div>
         </div>
       </Wrap>
-      {/* <Tabs /> */}
     </>
   );
 };

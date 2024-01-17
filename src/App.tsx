@@ -20,7 +20,6 @@ const App = () => {
   // } else {
   //   dayjs.locale('zh-cn');
   // }
-  console.log('app rerender');
 
   useEffect(() => {
     const isAuthenticated = isAuth();

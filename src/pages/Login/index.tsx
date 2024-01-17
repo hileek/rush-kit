@@ -1,6 +1,8 @@
 import React, { useTransition, useLayoutEffect } from 'react';
 import nprogress from 'nprogress';
-import { useNavigate } from 'react-router';
+// import { useLocation, useNavigate } from 'react-router';
+import { useLocation, useNavigate } from 'react-router-dom';
+
 import { Form, Input, Button, Checkbox } from 'antd';
 import { useDispatch } from 'react-redux';
 import { fetchRoutes } from '@/redux/actions/fetchRoutes'; 
@@ -39,27 +41,30 @@ const Wrapper = styled.div`
 `;
 
 const Login: React.FC = () => {
+  console.log('login render');
   const navigate = useNavigate();
   const dispatch = useDispatch();
+  const location = useLocation();
   const [isPending, startTransition] = useTransition();
 
   const onFinish = (values: any) => {
-    startTransition(() => {
+    // startTransition(() => {
       console.log('Received values:', values);
       // 在这里处理登录逻辑
       storage.setToken('123123');
       dispatch(fetchRoutes() as any);
-      navigate('/', { replace: true });
-    });
+      const path = location.state || '/';
+      navigate(path, { replace: true });
+    // });
   };
 
-  useLayoutEffect(() => {
-    if (isPending) {
-      nprogress.start();
-    } else {
-      nprogress.done();
-    }
-  }, [isPending]);
+  // useLayoutEffect(() => {
+  //   if (isPending) {
+  //     nprogress.start();
+  //   } else {
+  //     nprogress.done();
+  //   }
+  // }, [isPending]);
 
   return (
     <Wrapper>

@@ -14,6 +14,7 @@ const translation: Record<string, string> = {
   '任务日志': 'MissionLog',
   '权限管理': 'System Permissions',
   '时间': 'time',
+  '退出登录': 'log out',
 };
 
 export default translation;
