@@ -49,12 +49,12 @@ const Login: React.FC = () => {
 
   const onFinish = (values: any) => {
     // startTransition(() => {
-      console.log('Received values:', values);
-      // 在这里处理登录逻辑
-      storage.setToken('123123');
-      dispatch(fetchRoutes() as any);
-      const path = location.state || '/';
-      navigate(path, { replace: true });
+    console.log('Received values:', values);
+    // 在这里处理登录逻辑
+    storage.setToken('123123');
+    dispatch(fetchRoutes() as any);
+    const path = location.state || '/';
+    navigate(path, { replace: true });
     // });
   };
 

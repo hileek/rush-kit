@@ -2,20 +2,18 @@ import Cookies from 'js-cookie';
 import { TOKEN_NAME, TABS_NAME, LANGUAGE_NAME } from './constants';
 import type { Option, Language } from '@/types/app';
 
-const getItem = (key: string, initialState: any = null) => {
+const getItem = (key: string, initialState: unknown = null) => {
   const value = localStorage.getItem(key);
   return value ? JSON.parse(value) : initialState;
 };
 
-const setItem = (key: string, value: any) => {
+const setItem = (key: string, value: unknown) => {
   localStorage.setItem(key, JSON.stringify(value));
 };
 
 const removeItem = (key: string) => {
   localStorage.removeItem(key);
 };
-
-// export const isAuth = () => !!getItem(TOKEN_NAME);
 
 const getToken = () => Cookies.get(TOKEN_NAME);
 const setToken = (value: string, expires?: number) => {

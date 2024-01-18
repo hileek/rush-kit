@@ -18,6 +18,13 @@ module.exports = {
     node: true,
   },
   rules: {
+    '@typescript-eslint/type-annotation-spacing': ['error', {
+      before: false,
+      after: true,
+      overrides: {
+        arrow: { before: true, after: true },
+      },
+    }],
     'react/jsx-tag-spacing': ['error', {
       closingSlash: 'never',
       beforeSelfClosing: 'always',
@@ -29,6 +36,7 @@ module.exports = {
       html: true,
     }],
     'react/jsx-props-no-multi-spaces': ['error'],
+    indent: ['error', 2],
     'jsx-quotes': ['error', 'prefer-double'],
     'max-len': [
       'error',
@@ -47,7 +55,7 @@ module.exports = {
         objects: 'always-multiline',
         imports: 'always-multiline',
         exports: 'always-multiline',
-        functions: 'always-multiline',
+        functions: 'never',
       },
     ],
     'comma-spacing': ['error', { before: false, after: true }],
@@ -56,5 +64,7 @@ module.exports = {
     'object-curly-spacing': ['error', 'always'],
     'quote-props': ['error', 'as-needed', { keywords: false, unnecessary: true, numbers: false }],
     'array-bracket-spacing': ['error', 'never'],
+    'space-infix-ops': ['error', { int32Hint: false }],
+    'arrow-spacing': ['error', { before: true, after: true }],
   },
 };

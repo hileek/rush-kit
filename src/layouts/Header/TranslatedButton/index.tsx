@@ -57,7 +57,7 @@ const TranslatedButton: React.FC = () => {
       <Wrap onClick={changeLocale}>
         <div className="inner">
           <span className={current === 'zh' ? 'select' : ''}>中</span>
-          <span className={current === 'en' ?'select' : ''}>En</span>
+          <span className={current === 'en' ? 'select' : ''}>En</span>
         </div>
       </Wrap>
     </Tooltip>

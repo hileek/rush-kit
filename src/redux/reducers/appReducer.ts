@@ -20,33 +20,33 @@ const initialState: Init = {
 
 const appReducer = (state: Init = initialState, action: Action): Init => {
   switch (action.type) {
-    case SET_TABS:
+  case SET_TABS:
+    return {
+      ...state,
+      tabs: action.payload,
+    };
+  case ADD_TAB:
+    if (state.tabs.find(tab => tab.key === action.payload.key)) {
       return {
         ...state,
-        tabs: action.payload,
       };
-    case ADD_TAB:
-      if (state.tabs.find(tab => tab.key === action.payload.key)) {
-        return {
-          ...state,
-        };
-      }
-      return {
-        ...state,
-        tabs: [...state.tabs, action.payload],
-      };
-    case SET_SCREEN_TYPE:
-      return {
-        ...state,
-        screenType: action.payload,
-      };
-    case SET_COLLAPSED:
-      return {
-        ...state,
-        collapsed: action.payload,
-      };
-    default:
-      return state;
+    }
+    return {
+      ...state,
+      tabs: [...state.tabs, action.payload],
+    };
+  case SET_SCREEN_TYPE:
+    return {
+      ...state,
+      screenType: action.payload,
+    };
+  case SET_COLLAPSED:
+    return {
+      ...state,
+      collapsed: action.payload,
+    };
+  default:
+    return state;
   }
 };
 

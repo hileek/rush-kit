@@ -346,7 +346,7 @@ const Video = ({ autoPlay, src, control, muted, poster }) => {
           src={src}
           autoPlay={true}
           poster={poster}
-          preload='metadata'
+          preload="metadata"
           controls={true}
         />
       ) : (
@@ -362,7 +362,7 @@ const Video = ({ autoPlay, src, control, muted, poster }) => {
             onMouseMove={videoMouseMove}
             muted={!volumeLevel}
             poster={poster}
-            preload='metadata'
+            preload="metadata"
             onWaiting={() => {
               setLoading(true);
             }}
@@ -383,7 +383,7 @@ const Video = ({ autoPlay, src, control, muted, poster }) => {
               <div className="volume">
                 <div className="volume-icon" onClick={volumeIconClick}>
                   <div className="icon">
-                  {/* <TxIcon type="yinlianglabashengyin" /> */}
+                    {/* <TxIcon type="yinlianglabashengyin" /> */}
                     {!volumeLevel && <strong>\</strong>}
                   </div>
                 </div>
@@ -400,7 +400,7 @@ const Video = ({ autoPlay, src, control, muted, poster }) => {
                       </div>
                     </div>
                     <div className="volume-progress" style={{ width: `${volumeLevel * 100}%` }}>
-                      <div className="point"></div>
+                      <div className="point" />
                     </div>
                   </div>
                 </div>

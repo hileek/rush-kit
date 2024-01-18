@@ -13,7 +13,7 @@ type Translation = {
   translation: Record<string, string>;
 };
 
-const resources:Record<string, Translation> = {
+const resources: Record<string, Translation> = {
   en: {
     translation,
   },

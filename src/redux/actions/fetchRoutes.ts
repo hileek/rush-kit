@@ -11,4 +11,5 @@ export const fetchRoutes = createAsyncThunk<RouteType[], void>(
     } catch (error: any) {
       return rejectWithValue(error.response?.data);
     }
-});
+  }
+);
