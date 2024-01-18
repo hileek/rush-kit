@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Layout } from 'antd';
 import { useDispatch, useSelector } from 'react-redux';
 import styled from 'styled-components';
@@ -39,6 +39,7 @@ const Logo = styled.div`
 const Sider: React.FC = () => {
   const dispatch = useDispatch();
   const screenType = useScreenType();
+  const [test, setTest] = useState(false);
 
   const collapsed = useSelector((state: any) => state.app.collapsed);
 
@@ -79,6 +80,8 @@ const Sider: React.FC = () => {
     >
       <Logo>{collapsed ? 'Rush' : 'Rush Kit'}</Logo>
       <Menu />
+      {/* <Logo onClick={() => setTest(true)}>{collapsed ? 'Rush' : 'Rush Kit'}</Logo>
+      {test && <Menu />} */}
     </CustomSider>
   );
 };
