@@ -3,7 +3,7 @@ import { message } from 'antd';
 import storage from '@/utils/storage';
 
 const api = axios.create({
-  baseURL: process.env.REACT_APP_URL,
+  baseURL: process.env.APP_URL,
   timeout: 5000,
   headers: {
     'Content-Type': 'application/json',

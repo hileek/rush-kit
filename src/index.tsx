@@ -10,6 +10,7 @@ import { BrowserRouter } from 'react-router-dom';
 import store from './redux/store';
 import i18n from '@/locales/i18n';
 import 'nprogress/nprogress.css';
+console.log('process.env.GENERATE_SOURCEMAP', process.env.GENERATE_SOURCEMAP, process.env.PROXY_URL);
 
 const root = ReactDOM.createRoot(
   document.getElementById('root') as HTMLElement
